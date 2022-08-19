@@ -1,25 +1,18 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { Routes, Route } from "react-router-dom";
+import Layoyt from "./components/Layoyt";
+import MainPage from "./pages/MainPage";
+import Page404 from "./pages/Page404";
+import ProfilePage from "./pages/ProfilePage";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Routes>
+      <Route path="/" element={<Layoyt />}>
+        <Route index element={<MainPage />} />
+        <Route path="/:id" element={<ProfilePage />} />
+        <Route path="/404" element={<Page404 />} />
+      </Route>
+    </Routes>
   );
 }
 

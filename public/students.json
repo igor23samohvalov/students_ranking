@@ -1,0 +1,83 @@
+{
+  "students": [{
+    "id": "001",
+    "name": "Name",
+    "surname": "Surname",
+    "form": "10A",
+    "rating": 55,
+    "history": ["1", "2", "3"],
+    "ranking": 1
+  }, {
+    "id": "002",
+    "name": "Name",
+    "surname": "Surname",
+    "form": "10A",
+    "rating": 50,
+    "history": ["1", "2", "3"],
+    "ranking": 2
+  }, {
+    "id": "003",
+    "name": "Name",
+    "surname": "Surname",
+    "form": "10A",
+    "rating": 45,
+    "history": ["1", "2", "3"],
+    "ranking": 3
+  }, {
+    "id": "004",
+    "name": "Name",
+    "surname": "Surname",
+    "form": "10A",
+    "rating": 40,
+    "history": ["1", "2", "3"],
+    "ranking": 4
+  }, {
+    "id": "005",
+    "name": "Name",
+    "surname": "Surname",
+    "form": "10A",
+    "rating": 40,
+    "history": ["1", "2", "3"],
+    "ranking": 5
+  }, {
+    "id": "006",
+    "name": "Name",
+    "surname": "Surname",
+    "form": "10A",
+    "rating": 35,
+    "history": ["1", "2", "3"],
+    "ranking": 6
+  }, {
+    "id": "007",
+    "name": "Name",
+    "surname": "Surname",
+    "form": "10A",
+    "rating": 30,
+    "history": ["1", "2", "3"],
+    "ranking": 7
+  }, {
+    "id": "008",
+    "name": "Name",
+    "surname": "Surname",
+    "form": "10A",
+    "rating": 25,
+    "history": ["1", "2", "3"],
+    "ranking": 8
+  }, {
+    "id": "009",
+    "name": "Name",
+    "surname": "Surname",
+    "form": "10A",
+    "rating": 20,
+    "history": ["1", "2", "3"],
+    "ranking": 9
+  }, {
+    "id": "010",
+    "name": "Name",
+    "surname": "Surname",
+    "form": "10A",
+    "rating": 15,
+    "history": ["1", "2", "3"],
+    "ranking": 10
+  }]
+}
