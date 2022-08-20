@@ -12,17 +12,26 @@ export const Card = styled.div`
 export const CardBlock = styled.div`
   display: flex;
   flex-direction: column;
-  padding: 2rem;
+  justify-content: center;
+  padding: 1rem 0.5rem;
   gap: 1rem;
 
   > * {
     margin: 0;
   }
+
+  &:first-of-type {
+    padding-left: 2rem;
+  }
+  &:last-of-type {
+    margin-left: auto;
+    border-left: 5px solid #b8a590;
+    padding: 1rem 2rem;
+  }
 `;
 
 export const CardImg = styled.img`
-  width: 8rem;
-  height: 8rem;
-  border-radius: 1rem;
-  transform: translateY(-50%);
+  width: 6rem;
+  height: 6rem;
+  border: 3px solid #451b0b;
 `;

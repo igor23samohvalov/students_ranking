@@ -9,6 +9,8 @@ function StudentPreview(student: IStudent) {
     <Card>
       <CardBlock>
         <CardImg src="./imgs/avatar_placeholder.png" alt="avatar" />
+      </CardBlock>
+      <CardBlock>
         <h3>
           {surname} {name}
         </h3>

@@ -7,9 +7,9 @@ export const MenuContainer = styled.section`
   height: fit-content;
   padding: 2rem;
   background-color: #b8a590;
-  margin-top: 2rem;
+  gap: 2rem;
 `;
 
-export const StyledSelect = styled.input`
+export const StyledSomething = styled.input`
   width: 100%;
 `;

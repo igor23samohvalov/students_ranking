@@ -18,5 +18,18 @@ export const StudentsContainer = styled.section`
   flex-grow: 3;
   height: 80vh;
   overflow: auto;
-  padding: 2rem 0;
+  padding: 0 1rem 2rem 0;
+
+  ::-webkit-scrollbar {
+    width: 10px;
+  }
+  ::-webkit-scrollbar-track {
+    background-color: hsla(37, 100%, 68%, 0.14);
+    border-radius: 100px;
+  }
+  ::-webkit-scrollbar-thumb {
+    border-radius: 100px;
+    background-color: #b47c57;
+    box-shadow: inset 2px 2px 5px 0 rgba(#b47c57, 0.5);
+  }
 `;

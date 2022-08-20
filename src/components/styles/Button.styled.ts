@@ -9,11 +9,13 @@ export default styled.button`
   box-shadow: 0 0 0 2pt #bc8c61;
   color: #451b0b;
   background-color: #fcbd80;
-  pointer: cursor;
   transition: all 0.2s 0s ease;
   text-transform: uppercase;
+  font-size: 11px;
+  cursor: pointer;
 
   &:hover {
-    transform: scale(1.05, 1.05);
+    color: #fcbd80;
+    background-color: #451b0b;
   }
 `;

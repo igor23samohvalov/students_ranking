@@ -1,15 +1,25 @@
+import React from "react";
 import { MenuContainer } from "./styles/Menu.styled";
 import Button from "./styles/Button.styled";
+import { StyledSelect, options } from "./styles/StyledSelect";
 
-function Menu() {
+function Menu({
+  setAddModal,
+}: {
+  setAddModal: React.Dispatch<React.SetStateAction<boolean>>;
+}) {
+  const handleClick = (): void => {
+    setAddModal(true);
+  };
+
   return (
     <MenuContainer>
-      <h3>Выбрать класс:</h3>
-      <p>10A</p>
-      <p>10Б</p>
-      <p>11A</p>
-      <p>11Б</p>
-      <Button>Добавить ученика</Button>
+      <StyledSelect
+        options={options}
+        placeholder="Выбрать класс"
+        isSearchable={false}
+      />
+      <Button onClick={handleClick}>Добавить ученика</Button>
     </MenuContainer>
   );
 }
