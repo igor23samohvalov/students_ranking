@@ -1,6 +1,8 @@
 import { useEffect } from "react";
+// import { connectAuthEmulator } from "firebase/auth";
 import { Outlet, useNavigate } from "react-router-dom";
 import styled from "styled-components";
+// import { auth } from "../lib/firebase";
 
 const EntryCard = styled.section`
   position: absolute;
@@ -16,8 +18,8 @@ const EntryCard = styled.section`
 
 function EntryLayout() {
   const navigate = useNavigate();
-
   useEffect(() => {
+    // connectAuthEmulator(auth, "http://localhost:9099");
     if (localStorage.getItem("user")) navigate("/main");
   }, []);
 

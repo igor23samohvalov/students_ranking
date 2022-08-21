@@ -1,9 +1,30 @@
-import IStudent from "../Types/IStudent";
+import { fsMethods } from "../lib/firebase";
+import { IStudentId } from "../Types/IStudent";
 import Button from "./styles/Button.styled";
 import { Card, CardBlock, CardImg } from "./styles/StudentPreview.styled";
 
-function StudentPreview(student: IStudent) {
-  const { surname, name, ranking, rating } = student;
+function StudentPreview({
+  student,
+  addStudent,
+  setEditModal,
+}: {
+  student: IStudentId;
+  addStudent: React.Dispatch<React.SetStateAction<any>>;
+  setEditModal: React.Dispatch<React.SetStateAction<any>>;
+}) {
+  const { surname, name, ranking, rating, id } = student;
+
+  const handleRemove = () => {
+    try {
+      fsMethods.removeStudent(id);
+      fsMethods.loadStudents(addStudent);
+    } catch (error) {
+      alert(error);
+    }
+  };
+  const handleEdit = () => {
+    setEditModal({ shown: true, student });
+  };
 
   return (
     <Card>
@@ -18,8 +39,8 @@ function StudentPreview(student: IStudent) {
         <p>Rating: {rating}</p>
       </CardBlock>
       <CardBlock>
-        <Button>Редактировать</Button>
-        <Button>Удалить</Button>
+        <Button onClick={handleEdit}>Редактировать</Button>
+        <Button onClick={handleRemove}>Удалить</Button>
       </CardBlock>
     </Card>
   );

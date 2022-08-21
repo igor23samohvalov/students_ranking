@@ -1,43 +1,36 @@
 import { Formik, FormikHelpers, Field } from "formik";
-import { RiCloseLine } from "react-icons/ri";
-import styled from "styled-components";
+import { fsMethods } from "../lib/firebase";
 import {
   ModalContainer,
   StyledForm,
   ModalBody,
 } from "./styles/AddModal.styled";
 import Button from "./styles/Button.styled";
+import CloseIcon from "./styles/CloseIcon";
+import Loader from "./styles/Loader";
 
-interface Values {
+interface IValues {
   name: string;
   surname: string;
   form: string;
   rating: number;
 }
 
-const StyledIcon = styled(RiCloseLine).attrs({
-  size: "1.7em",
-})`
-  position: absolute;
-  top: -2rem;
-  right: -2rem;
-  color: #451b0b;
-  cursor: pointer;
-`;
-
 function AddModal({
-  isShown,
+  isShownAddModal,
   setAddModal,
+  addStudent,
 }: {
-  isShown: boolean;
+  isShownAddModal: boolean;
   setAddModal: React.Dispatch<React.SetStateAction<boolean>>;
+  addStudent: React.Dispatch<React.SetStateAction<any>>;
 }) {
   const handleClick = () => {
     setAddModal(false);
   };
 
   return (
-    <ModalContainer display={Number(isShown)}>
+    <ModalContainer display={Number(isShownAddModal)}>
       <ModalBody>
         <Formik
           initialValues={{
@@ -46,35 +39,46 @@ function AddModal({
             form: "",
             rating: 0,
           }}
-          onSubmit={(
-            values: Values,
-            { setSubmitting }: FormikHelpers<Values>,
+          onSubmit={async (
+            values: IValues,
+            { setSubmitting, resetForm }: FormikHelpers<IValues>,
           ) => {
+            setSubmitting(true);
+            try {
+              fsMethods.addStudent({ ...values, history: [], ranking: 0 });
+              fsMethods.loadStudents(addStudent);
+              setAddModal(false);
+              resetForm();
+            } catch (error) {
+              alert(error);
+            }
             setSubmitting(false);
-            console.log(values);
-            setAddModal(false);
           }}
         >
-          <StyledForm>
-            <label>
-              Имя:
-              <Field type="text" name="name" placeholder="Иван" />
-            </label>
-            <label>
-              Фамилия:
-              <Field type="text" name="surname" placeholder="Иванов" />
-            </label>
-            <label>
-              Класс:
-              <Field type="text" name="form" placeholder="10А" />
-            </label>
-            <label>
-              Рейтинг:
-              <Field type="number" name="rating" placeholder="50" />
-            </label>
-            <Button type="submit">Добавить</Button>
-            <StyledIcon onClick={handleClick} />
-          </StyledForm>
+          {(formik) => (
+            <StyledForm>
+              <label>
+                Имя:
+                <Field type="text" name="name" placeholder="Иван" />
+              </label>
+              <label>
+                Фамилия:
+                <Field type="text" name="surname" placeholder="Иванов" />
+              </label>
+              <label>
+                Класс:
+                <Field type="text" name="form" placeholder="10А" />
+              </label>
+              <label>
+                Рейтинг:
+                <Field type="number" name="rating" placeholder="50" />
+              </label>
+              <Button type="submit">
+                {formik.isSubmitting ? <Loader /> : "Добавить"}
+              </Button>
+              <CloseIcon onClick={handleClick} />
+            </StyledForm>
+          )}
         </Formik>
       </ModalBody>
     </ModalContainer>

@@ -2,7 +2,7 @@ import { createContext } from "react";
 
 interface IUser {
   user: null | string;
-  logIn: () => void;
+  logIn: (login: string) => void;
   logOut: () => void;
 }
 

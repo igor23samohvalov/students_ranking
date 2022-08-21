@@ -1,9 +1,11 @@
+import { createUserWithEmailAndPassword } from "firebase/auth";
 import { Field, Formik, FormikHelpers } from "formik";
 import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { StyledForm } from "../components/styles/AddModal.styled";
 import Button from "../components/styles/Button.styled";
-import useAuth from "../hooks/useAuth";
+import Loader from "../components/styles/Loader";
+import { auth } from "../lib/firebase";
 
 interface Values {
   username: string;
@@ -19,7 +21,6 @@ const StyledLink = styled(Link)`
 `;
 
 function SignUpPage() {
-  const { logIn } = useAuth();
   const navigate = useNavigate();
 
   return (
@@ -29,30 +30,46 @@ function SignUpPage() {
         password: "",
         email: "",
       }}
-      onSubmit={(values: Values, { setSubmitting }: FormikHelpers<Values>) => {
+      onSubmit={async (
+        values: Values,
+        { setSubmitting }: FormikHelpers<Values>,
+      ) => {
+        setSubmitting(true);
+        try {
+          const userCredential = await createUserWithEmailAndPassword(
+            auth,
+            values.email,
+            values.password,
+          );
+          navigate("/");
+          console.log(userCredential.user);
+        } catch (error) {
+          console.log(error);
+        }
         setSubmitting(false);
-        console.log(values);
-        logIn();
-        navigate("/main");
       }}
     >
-      <StyledForm>
-        <h2>Регистрация</h2>
-        <label>
-          Имя пользователя:
-          <Field type="text" name="username" placeholder="Логин" />
-        </label>
-        <label>
-          Электронная почта:
-          <Field type="email" name="email" placeholder="pochta@gmail.com" />
-        </label>
-        <label>
-          Пароль:
-          <Field type="password" name="password" placeholder="Пароль" />
-        </label>
-        <Button type="submit">Зарегистрироваться</Button>
-        <StyledLink to="/">Уже зарегистированы? Войти</StyledLink>
-      </StyledForm>
+      {(formik) => (
+        <StyledForm>
+          <h2>Регистрация</h2>
+          <label>
+            Имя пользователя:
+            <Field type="text" name="username" placeholder="Логин" />
+          </label>
+          <label>
+            Электронная почта:
+            <Field type="email" name="email" placeholder="pochta@gmail.com" />
+          </label>
+          <label>
+            Пароль:
+            <Field type="password" name="password" placeholder="Пароль" />
+          </label>
+          <Button type="submit">
+            {formik.isSubmitting ? <Loader /> : "Зарегистрироваться"}
+          </Button>
+          <StyledLink to="/">Уже зарегистированы? Войти</StyledLink>
+        </StyledForm>
+      )}
     </Formik>
   );
 }

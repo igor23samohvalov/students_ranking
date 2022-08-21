@@ -7,15 +7,16 @@ interface IModal {
 
 export const ModalContainer = styled.div<IModal>`
   display: ${({ display }) => (display ? "block;" : "none;")};
-  position: fixed; /* Stay in place */
-  z-index: 1; /* Sit on top */
+  position: fixed;
+  z-index: 1;
   left: 0;
   top: 0;
-  width: 100%; /* Full width */
-  height: 100%; /* Full height */
-  overflow: auto; /* Enable scroll if needed */
-  background-color: rgb(0, 0, 0); /* Fallback color */
-  background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgb(0, 0, 0);
+  background-color: rgba(0, 0, 0, 0.4);
+  transition: all 0.5s 0s ease;
 `;
 
 export const ModalBody = styled.div`
@@ -27,7 +28,6 @@ export const ModalBody = styled.div`
   background-color: #fcbd80;
   border: 2px solid #451b0b;
   border-radius: 10px;
-  transition: all 0.2s 0s ease;
   box-shadow: 0 3px 7px rgba(0, 0, 0, 0.3);
 `;
 

@@ -18,7 +18,8 @@ export const StudentsContainer = styled.section`
   flex-grow: 3;
   height: 80vh;
   overflow: auto;
-  padding: 0 1rem 2rem 0;
+  padding-bottom: 1rem;
+  padding-right: 0.2rem;
 
   ::-webkit-scrollbar {
     width: 10px;
