@@ -12,7 +12,7 @@ function StudentPreview({
   addStudent: React.Dispatch<React.SetStateAction<any>>;
   setEditModal: React.Dispatch<React.SetStateAction<any>>;
 }) {
-  const { surname, name, ranking, rating, id } = student;
+  const { surname, name, ranking, rating, id, form } = student;
 
   const handleRemove = () => {
     try {
@@ -33,10 +33,10 @@ function StudentPreview({
       </CardBlock>
       <CardBlock>
         <h3>
-          {surname} {name}
+          {surname} {name}, {form}
         </h3>
-        <h4>Rank: {ranking}</h4>
-        <p>Rating: {rating}</p>
+        <h4>Ранг: {ranking}</h4>
+        <p>Рейтинг: {rating}</p>
       </CardBlock>
       <CardBlock>
         <Button onClick={handleEdit}>Редактировать</Button>

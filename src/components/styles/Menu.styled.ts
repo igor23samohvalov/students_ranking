@@ -1,6 +1,8 @@
 import styled from "styled-components";
 
 export const MenuContainer = styled.section`
+  font-family: "Press Start 2P", cursive;
+  font-size: 16px;
   display: flex;
   flex-direction: column;
   flex-grow: 1;

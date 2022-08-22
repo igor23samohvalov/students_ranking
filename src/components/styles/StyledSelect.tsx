@@ -2,11 +2,11 @@ import Select from "react-select";
 import styled from "styled-components";
 
 export const options = [
-  { value: "all", label: "ВСЕ" },
-  { value: "10A", label: "10A" },
-  { value: "10B", label: "10B" },
-  { value: "11A", label: "11A" },
-  { value: "11B", label: "11B" },
+  { value: false, label: "ВСЕ" },
+  { value: "10А", label: "10А" },
+  { value: "10Б", label: "10Б" },
+  { value: "11А", label: "11А" },
+  { value: "11Б", label: "11Б" },
 ];
 
 export const StyledSelect = styled(Select).attrs({

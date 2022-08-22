@@ -5,7 +5,6 @@ import {
   Wrapper,
 } from "../components/styles/MainPage.styled";
 import StudentPreview from "../components/StudentPreview";
-// import IStudent from "../Types/IStudent";
 import Menu from "../components/Menu";
 import AddModal from "../components/AddModal";
 import { fsMethods } from "../lib/firebase";
@@ -14,22 +13,30 @@ import EditModal from "../components/EditModal";
 
 function MainPage() {
   const [students, setStudents] = useState<IStudentId[]>([]);
+  const [filteredStudents, setFilteredStudents] = useState<IStudentId[]>([]);
   const [isShownAddModal, setAddModal] = useState<boolean>(false);
+  const [form, setForm] = useState<string | boolean>(false);
   const [isShownEditModal, setEditModal] = useState<any>({
     shown: false,
     student: {},
   });
 
   useEffect(() => {
+    console.log("initial render");
     fsMethods.loadStudents(setStudents);
   }, []);
+  useEffect(() => {
+    console.log("rerender");
+    if (!form) setFilteredStudents(students);
+    else setFilteredStudents(students.filter((s) => s.form === form));
+  }, [form, students]);
 
   return (
     <Container>
       <Wrapper>
-        <Menu setAddModal={setAddModal} />
+        <Menu setAddModal={setAddModal} setForm={setForm} />
         <StudentsContainer>
-          {students.map((student: IStudentId) => (
+          {filteredStudents.map((student: IStudentId) => (
             <StudentPreview
               key={student.id}
               student={student}
