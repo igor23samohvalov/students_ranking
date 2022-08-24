@@ -19,13 +19,17 @@ export default function UserProvider({ children }: { children: JSX.Element }) {
       if (user) {
         // https://firebase.google.com/docs/reference/js/firebase.User
         console.log("user is in: ", user);
-        user
-          .getIdTokenResult()
-          .then((idTokenResult) => {
-            if (idTokenResult.claims?.role) logIn(idTokenResult.claims.role);
-            else logIn("student");
-          })
-          .catch(console.log);
+        // user
+        //   .getIdTokenResult()
+        //   .then((idTokenResult) => {
+        //     if (idTokenResult.claims?.role) logIn(idTokenResult.claims.role);
+        //     else logIn("student");
+
+        //     console.log(idTokenResult);
+        //   })
+        //   .catch(console.log);
+        if (user.uid === "jhxsZsaQb8TtBiW1eVf8k0D8MSl2") logIn("teacher");
+        else logIn("student");
       } else {
         logOut();
         console.log("user is out");
