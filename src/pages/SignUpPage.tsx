@@ -14,9 +14,9 @@ interface Values {
 }
 
 const StyledLink = styled(Link)`
-  color: #f94892;
+  color: #a10035;
   &:hover {
-    color: #fbdf07;
+    color: #2a0944;
   }
 `;
 
@@ -36,15 +36,14 @@ function SignUpPage() {
       ) => {
         setSubmitting(true);
         try {
-          const userCredential = await createUserWithEmailAndPassword(
+          await createUserWithEmailAndPassword(
             auth,
             values.email,
             values.password,
           );
           navigate("/");
-          console.log(userCredential.user);
         } catch (error) {
-          console.log(error);
+          alert(error);
         }
         setSubmitting(false);
       }}

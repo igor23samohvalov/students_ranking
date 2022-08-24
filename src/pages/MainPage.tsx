@@ -10,6 +10,7 @@ import AddModal from "../components/AddModal";
 import { fsMethods } from "../lib/firebase";
 import { IStudentId } from "../Types/IStudent";
 import EditModal from "../components/EditModal";
+import PlaceholderStudent from "../components/PlaceholderStudent";
 
 function MainPage() {
   const [students, setStudents] = useState<IStudentId[]>([]);
@@ -22,11 +23,9 @@ function MainPage() {
   });
 
   useEffect(() => {
-    console.log("initial render");
     fsMethods.loadStudents(setStudents);
   }, []);
   useEffect(() => {
-    console.log("rerender");
     if (!form) setFilteredStudents(students);
     else setFilteredStudents(students.filter((s) => s.form === form));
   }, [form, students]);
@@ -36,14 +35,18 @@ function MainPage() {
       <Wrapper>
         <Menu setAddModal={setAddModal} setForm={setForm} />
         <StudentsContainer>
-          {filteredStudents.map((student: IStudentId) => (
-            <StudentPreview
-              key={student.id}
-              student={student}
-              addStudent={setStudents}
-              setEditModal={setEditModal}
-            />
-          ))}
+          {filteredStudents.length === 0 ? (
+            <PlaceholderStudent />
+          ) : (
+            filteredStudents.map((student: IStudentId) => (
+              <StudentPreview
+                key={student.id}
+                student={student}
+                addStudent={setStudents}
+                setEditModal={setEditModal}
+              />
+            ))
+          )}
         </StudentsContainer>
         <AddModal
           isShownAddModal={isShownAddModal}

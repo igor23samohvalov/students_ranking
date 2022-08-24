@@ -1,12 +1,14 @@
 import { useEffect } from "react";
 import { Outlet, useNavigate } from "react-router-dom";
+import useAuth from "../hooks/useAuth";
 import Header from "./Header";
 
-function Layoyt() {
+function MainLayout() {
   const navigate = useNavigate();
+  const { user } = useAuth();
 
   useEffect(() => {
-    if (!localStorage.getItem("user")) navigate("/");
+    if (!user) navigate("/");
   }, []);
 
   return (
@@ -17,4 +19,4 @@ function Layoyt() {
   );
 }
 
-export default Layoyt;
+export default MainLayout;

@@ -1,12 +1,13 @@
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { Field, Formik, FormikHelpers } from "formik";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { StyledForm } from "../components/styles/AddModal.styled";
 import Button from "../components/styles/Button.styled";
 import Loader from "../components/styles/Loader";
 import useAuth from "../hooks/useAuth";
 import { auth } from "../lib/firebase";
+import ButtonBlock from "../components/styles/EntryPage.styled";
 
 interface Values {
   username: string;
@@ -15,15 +16,14 @@ interface Values {
 }
 
 const StyledLink = styled(Link)`
-  color: #f94892;
+  color: #a10035;
   &:hover {
-    color: #fbdf07;
+    color: #2a0944;
   }
 `;
 
 function EntryPage() {
   const { logIn } = useAuth();
-  const navigate = useNavigate();
 
   return (
     <Formik
@@ -44,7 +44,6 @@ function EntryPage() {
             values.password,
           );
           logIn(values.username);
-          navigate("/main");
         } catch (error) {
           alert(error);
         }
@@ -72,9 +71,16 @@ function EntryPage() {
               Студент
             </label>
           </div>
-          <Button type="submit">
-            {formik.isSubmitting ? <Loader /> : "Войти"}
-          </Button>
+          <div>
+            <ButtonBlock>
+              <Button type="button" onClick={() => logIn("guest")}>
+                Зайти как гость
+              </Button>
+              <Button type="submit">
+                {formik.isSubmitting ? <Loader /> : "Войти"}
+              </Button>
+            </ButtonBlock>
+          </div>
           <StyledLink to="/signup">Не зарегистрированы?</StyledLink>
         </StyledForm>
       )}

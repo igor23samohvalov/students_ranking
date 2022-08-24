@@ -1,3 +1,6 @@
+import { IoSettings, IoPersonRemoveSharp } from "react-icons/io5";
+import { CgProfile } from "react-icons/cg";
+import useAuth from "../hooks/useAuth";
 import { fsMethods } from "../lib/firebase";
 import { IStudentId } from "../Types/IStudent";
 import Button from "./styles/Button.styled";
@@ -13,6 +16,7 @@ function StudentPreview({
   setEditModal: React.Dispatch<React.SetStateAction<any>>;
 }) {
   const { surname, name, ranking, rating, id, form } = student;
+  const { user } = useAuth();
 
   const handleRemove = () => {
     try {
@@ -27,7 +31,11 @@ function StudentPreview({
   };
 
   return (
-    <Card>
+    <Card
+      initial={{ opacity: 0, scale: 0.8 }}
+      animate={{ opacity: 1, scale: 1 }}
+      transition={{ duration: 0.2 }}
+    >
       <CardBlock>
         <CardImg src="./imgs/avatar_placeholder.png" alt="avatar" />
       </CardBlock>
@@ -38,9 +46,21 @@ function StudentPreview({
         <h4>Ранг: {ranking}</h4>
         <p>Рейтинг: {rating}</p>
       </CardBlock>
+
       <CardBlock>
-        <Button onClick={handleEdit}>Редактировать</Button>
-        <Button onClick={handleRemove}>Удалить</Button>
+        <Button>
+          <CgProfile />
+        </Button>
+        {user === "teacher" ? (
+          <>
+            <Button onClick={handleEdit}>
+              <IoSettings />
+            </Button>
+            <Button onClick={handleRemove}>
+              <IoPersonRemoveSharp />
+            </Button>
+          </>
+        ) : null}
       </CardBlock>
     </Card>
   );

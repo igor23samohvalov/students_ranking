@@ -5,7 +5,7 @@ export const MenuContainer = styled.section`
   font-size: 16px;
   display: flex;
   flex-direction: column;
-  flex-grow: 1;
+  width: 30%;
   height: fit-content;
   padding: 2rem;
   background-color: #b8a590;

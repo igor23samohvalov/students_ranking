@@ -15,7 +15,7 @@ export const Wrapper = styled.main`
 export const StudentsContainer = styled.section`
   display flex;
   flex-direction: column;
-  flex-grow: 3;
+  width: 70%;
   height: 80vh;
   overflow: auto;
   padding-bottom: 1rem;
