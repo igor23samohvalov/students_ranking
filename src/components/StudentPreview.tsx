@@ -1,10 +1,10 @@
-import { IoSettings, IoPersonRemoveSharp } from "react-icons/io5";
-import { CgProfile } from "react-icons/cg";
+import { useNavigate } from "react-router-dom";
 import useAuth from "../hooks/useAuth";
 import { fsMethods } from "../lib/firebase";
 import { IStudentId } from "../Types/IStudent";
 import Button from "./styles/Button.styled";
 import { Card, CardBlock, CardImg } from "./styles/StudentPreview.styled";
+import { EditIcon, ProfileIcon, RemoveIcon } from "./styles/StyledIcons.styled";
 
 function StudentPreview({
   student,
@@ -17,6 +17,7 @@ function StudentPreview({
 }) {
   const { surname, name, ranking, rating, id, form } = student;
   const { user } = useAuth();
+  const navigate = useNavigate();
 
   const handleRemove = () => {
     try {
@@ -48,16 +49,16 @@ function StudentPreview({
       </CardBlock>
 
       <CardBlock>
-        <Button>
-          <CgProfile />
+        <Button onClick={() => navigate(id)}>
+          <ProfileIcon />
         </Button>
         {user === "teacher" ? (
           <>
             <Button onClick={handleEdit}>
-              <IoSettings />
+              <EditIcon />
             </Button>
-            <Button onClick={handleRemove}>
-              <IoPersonRemoveSharp />
+            <Button onClick={handleRemove} style={{ background: "#a10035" }}>
+              <RemoveIcon />
             </Button>
           </>
         ) : null}

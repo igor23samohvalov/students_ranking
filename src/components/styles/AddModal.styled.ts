@@ -4,6 +4,9 @@ import styled from "styled-components";
 interface IModal {
   display: number;
 }
+interface IForm {
+  inputwidth: string;
+}
 
 export const ModalContainer = styled.div<IModal>`
   display: ${({ display }) => (display ? "block;" : "none;")};
@@ -31,24 +34,31 @@ export const ModalBody = styled.div`
   box-shadow: 0 3px 7px rgba(0, 0, 0, 0.3);
 `;
 
-export const StyledForm = styled(Form)`
+export const StyledForm = styled(Form)<IForm>`
   font-family: "Press Start 2P", cursive;
   position: relative;
   display: flex;
   flex-direction: column;
   gap: 1rem;
 
+  h2 {
+    text-align: center;
+  }
+
   > label {
-    display: flex;
-    justify-content: flex-end;
+    display: grid;
+    grid-template-columns: ${(props) => props.inputwidth} 1fr;
     align-items: center;
     gap: 2rem;
+    align-items: center;
+    justify-items: end;
 
     input {
       font-family: "Press Start 2P", cursive;
       border: 1px solid #451b0b;
       background-color: #fcbd80;
       padding: 1rem;
+      width: 100%;
     }
   }
   > div {

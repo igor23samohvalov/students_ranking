@@ -12,6 +12,7 @@ import {
   deleteDoc,
   doc,
   setDoc,
+  getDoc,
 } from "firebase/firestore";
 // import { getStorage } from "firebase/storage";
 import IConfig from "../Types/IConfig";
@@ -80,6 +81,14 @@ export const fsMethods = {
       tempStudents.push({ id: doc.id, ...doc.data() }),
     );
     setter(tempStudents);
+  },
+  loadStudnet: async (
+    setter: React.Dispatch<React.SetStateAction<any>>,
+    id: string,
+  ) => {
+    const docRef = doc(firestore, "students", id);
+    const docSnap = await getDoc(docRef);
+    if (docSnap.exists()) setter(docSnap.data());
   },
   addStudent: async (data: IStudent) => {
     await addDoc(collection(firestore, "students"), data);

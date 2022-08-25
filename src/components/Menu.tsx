@@ -1,7 +1,7 @@
 import React from "react";
 import { MenuContainer } from "./styles/Menu.styled";
 import Button from "./styles/Button.styled";
-import { StyledSelect, options } from "./styles/StyledSelect";
+import { StyledSelect, allOptions } from "./styles/StyledSelect";
 
 function Menu({
   setAddModal,
@@ -19,15 +19,13 @@ function Menu({
 
   return (
     <MenuContainer>
-      <label>
-        Выбрать класс
-        <StyledSelect
-          options={options}
-          defaultValue={options[0]}
-          isSearchable={false}
-          onChange={handleChange}
-        />
-      </label>
+      <h4>Выбрать класс</h4>
+      <StyledSelect
+        options={allOptions}
+        defaultValue={allOptions[0]}
+        isSearchable={false}
+        onChange={handleChange}
+      />
       <Button onClick={handleClick}>Добавить ученика</Button>
     </MenuContainer>
   );

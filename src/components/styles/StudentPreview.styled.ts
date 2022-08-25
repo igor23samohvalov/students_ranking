@@ -20,8 +20,8 @@ export const CardBlock = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding: 1rem 0.5rem;
-  gap: 1rem;
+  padding: 0.5rem 0.5rem;
+  gap: 0.5rem;
 
   > * {
     margin: 0;
@@ -39,6 +39,8 @@ export const CardBlock = styled.div`
     padding: 1rem 2rem;
 
     > button {
+      padding: 0.5rem;
+      box-shadow: none;
       height: fit-content;
       width: fit-content;
     }
@@ -46,7 +48,7 @@ export const CardBlock = styled.div`
 `;
 
 export const CardImg = styled.img`
-  width: 6rem;
-  height: 6rem;
+  width: 4.5rem;
+  height: 4.5rem;
   border: 3px solid #451b0b;
 `;

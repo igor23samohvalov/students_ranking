@@ -8,6 +8,7 @@ import {
 } from "./styles/AddModal.styled";
 import Button from "./styles/Button.styled";
 import CloseIcon from "./styles/CloseIcon";
+import { defaultOptions, StyledSelect } from "./styles/StyledSelect";
 
 interface IValues {
   name: string;
@@ -56,28 +57,38 @@ function EditModal({
             setSubmitting(false);
           }}
         >
-          <StyledForm>
-            <label>
-              Имя:
-              <Field type="text" name="name" placeholder="Иван" />
-            </label>
-            <label>
-              Фамилия:
-              <Field type="text" name="surname" placeholder="Иванов" />
-            </label>
-            <label>
-              Класс:
-              <Field type="text" name="form" placeholder="10А" />
-            </label>
-            <label>
-              Рейтинг:
-              <Field type="number" name="rating" placeholder="50" />
-            </label>
-            <Button type="submit">Сохранить</Button>
-            <CloseIcon
-              onClick={() => setEditModal({ student: {}, shown: false })}
-            />
-          </StyledForm>
+          {(formik) => (
+            <StyledForm inputwidth="0.5fr">
+              <label>
+                Имя:
+                <Field type="text" name="name" placeholder="Иван" />
+              </label>
+              <label>
+                Фамилия:
+                <Field type="text" name="surname" placeholder="Иванов" />
+              </label>
+              <label>
+                Класс:
+                <StyledSelect
+                  name="form"
+                  placeholder="10А"
+                  options={defaultOptions}
+                  isSearchable={false}
+                  onChange={(e: any) => {
+                    formik.setFieldValue("form", e.value);
+                  }}
+                />
+              </label>
+              <label>
+                Рейтинг:
+                <Field type="number" name="rating" placeholder="50" />
+              </label>
+              <Button type="submit">Сохранить</Button>
+              <CloseIcon
+                onClick={() => setEditModal({ student: {}, shown: false })}
+              />
+            </StyledForm>
+          )}
         </Formik>
       </ModalBody>
     </ModalContainer>

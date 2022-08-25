@@ -49,7 +49,7 @@ function SignUpPage() {
       }}
     >
       {(formik) => (
-        <StyledForm>
+        <StyledForm inputwidth="1fr">
           <h2>Регистрация</h2>
           <label>
             Имя пользователя:

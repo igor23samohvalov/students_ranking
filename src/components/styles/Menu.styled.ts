@@ -10,6 +10,10 @@ export const MenuContainer = styled.section`
   padding: 2rem;
   background-color: #b8a590;
   gap: 2rem;
+
+  h4 {
+    margin: 0;
+  }
 `;
 
 export const StyledSomething = styled.input`

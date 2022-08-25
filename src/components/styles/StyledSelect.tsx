@@ -1,8 +1,14 @@
 import Select from "react-select";
 import styled from "styled-components";
 
-export const options = [
+export const allOptions = [
   { value: false, label: "ВСЕ" },
+  { value: "10А", label: "10А" },
+  { value: "10Б", label: "10Б" },
+  { value: "11А", label: "11А" },
+  { value: "11Б", label: "11Б" },
+];
+export const defaultOptions = [
   { value: "10А", label: "10А" },
   { value: "10Б", label: "10Б" },
   { value: "11А", label: "11А" },
@@ -25,7 +31,6 @@ export const StyledSelect = styled(Select).attrs({
     }),
   },
 })`
-  width: 100%;
   font-family: "Press Start 2P", cursive;
   font-size: 12px;
   color: #451b0b;

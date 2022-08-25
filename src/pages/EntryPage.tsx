@@ -51,7 +51,7 @@ function EntryPage() {
       }}
     >
       {(formik) => (
-        <StyledForm>
+        <StyledForm inputwidth="1fr">
           <h2>Авторизация</h2>
           <label>
             Имя пользователя:

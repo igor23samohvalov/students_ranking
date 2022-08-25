@@ -8,6 +8,7 @@ import {
 import Button from "./styles/Button.styled";
 import CloseIcon from "./styles/CloseIcon";
 import Loader from "./styles/Loader";
+import { defaultOptions, StyledSelect } from "./styles/StyledSelect";
 
 interface IValues {
   name: string;
@@ -56,7 +57,7 @@ function AddModal({
           }}
         >
           {(formik) => (
-            <StyledForm>
+            <StyledForm inputwidth="0.5fr">
               <label>
                 Имя:
                 <Field type="text" name="name" placeholder="Иван" />
@@ -67,7 +68,15 @@ function AddModal({
               </label>
               <label>
                 Класс:
-                <Field type="text" name="form" placeholder="10А" />
+                <StyledSelect
+                  name="form"
+                  placeholder="10А"
+                  options={defaultOptions}
+                  isSearchable={false}
+                  onChange={(e: any) => {
+                    formik.setFieldValue("form", e.value);
+                  }}
+                />
               </label>
               <label>
                 Рейтинг:

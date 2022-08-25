@@ -16,8 +16,8 @@ function App() {
       </Route>
       <Route path="main" element={<MainLayout />}>
         <Route index element={<MainPage />} />
-        <Route path="main/:id" element={<ProfilePage />} />
-        <Route path="main/404" element={<Page404 />} />
+        <Route path=":id" element={<ProfilePage />} />
+        <Route path="404" element={<Page404 />} />
       </Route>
     </Routes>
   );
