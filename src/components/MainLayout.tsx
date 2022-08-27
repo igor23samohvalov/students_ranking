@@ -4,7 +4,6 @@ import { useAppDispatch } from "../hooks/reduxHooks";
 import useAuth from "../hooks/useAuth";
 import { fetchStudents } from "../store/studentsSlice";
 import Header from "./Header";
-// import { fsMethods } from "../lib/firebase";
 
 function MainLayout() {
   const dispatch = useAppDispatch();
@@ -15,7 +14,7 @@ function MainLayout() {
     if (!user) navigate("/");
 
     dispatch(fetchStudents());
-  }, [dispatch]);
+  }, [dispatch, user, navigate]);
 
   return (
     <div>

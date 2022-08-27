@@ -1,4 +1,9 @@
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import {
+  createSlice,
+  createAsyncThunk,
+  PayloadAction,
+  AnyAction,
+} from "@reduxjs/toolkit";
 import {
   addDoc,
   collection,
@@ -22,7 +27,7 @@ export const fetchStudents = createAsyncThunk<
     const q = query(collection(firestore, "students"));
     const querySnapshot = await getDocs(q);
     querySnapshot.forEach((doc) =>
-      students.push({ id: doc.id, ...doc.data() }),
+      students.push({ ...doc.data(), id: doc.id }),
     );
 
     return students;
@@ -36,9 +41,9 @@ export const addStudent = createAsyncThunk<
   { rejectValue: string }
 >("students/addStudent", async (data, { rejectWithValue }) => {
   try {
-    const some = await addDoc(collection(firestore, "students"), data);
+    const doc = await addDoc(collection(firestore, "students"), data);
 
-    return { ...data, id: some.id };
+    return { ...data, id: doc.id };
   } catch (error: any) {
     return rejectWithValue(error.message);
   }
@@ -82,6 +87,10 @@ const initialState: StudentsState = {
   loading: false,
   error: null,
 };
+
+function isError(action: AnyAction) {
+  return action.type.endsWith("rejected");
+}
 
 const studentsSlice = createSlice({
   name: "students",
@@ -127,6 +136,10 @@ const studentsSlice = createSlice({
       })
       .addCase(removeStudent.fulfilled, (state, action) => {
         state.list = state.list.filter((s) => s.id !== action.payload);
+      })
+      .addMatcher(isError, (state, action: PayloadAction<string>) => {
+        state.error = action.payload;
+        state.loading = false;
       });
   },
 });

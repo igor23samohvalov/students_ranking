@@ -28,8 +28,8 @@ export default function UserProvider({ children }: { children: JSX.Element }) {
         //     console.log(idTokenResult);
         //   })
         //   .catch(console.log);
-        if (user.uid === "jhxsZsaQb8TtBiW1eVf8k0D8MSl2") logIn("student");
-        else logIn("teacher");
+        if (user.uid === "jhxsZsaQb8TtBiW1eVf8k0D8MSl2") logIn("teacher");
+        else logIn("student");
       } else {
         logOut();
         console.log("user is out");
