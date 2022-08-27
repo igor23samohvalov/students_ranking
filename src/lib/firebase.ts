@@ -8,15 +8,8 @@ import {
   query,
   limit,
   connectFirestoreEmulator,
-  addDoc,
-  deleteDoc,
-  doc,
-  setDoc,
-  getDoc,
 } from "firebase/firestore";
-// import { getStorage } from "firebase/storage";
 import IConfig from "../Types/IConfig";
-import { IStudent } from "../Types/IStudent";
 
 const firebaseConfig = {
   apiKey: "AIzaSyCBsrgKubZ6XliWSo8FezikUmpF0pMRjsM",
@@ -71,33 +64,3 @@ export function postToJSON(doc: any) {
     updatedAt: data?.updatedAt.toMillis() || 0,
   };
 }
-
-export const fsMethods = {
-  loadStudents: async (setter: React.Dispatch<React.SetStateAction<any[]>>) => {
-    const tempStudents: any = [];
-    const q = query(collection(firestore, "students"));
-    const querySnapshot = await getDocs(q);
-    querySnapshot.forEach((doc) =>
-      tempStudents.push({ id: doc.id, ...doc.data() }),
-    );
-    setter(tempStudents);
-  },
-  loadStudnet: async (
-    setter: React.Dispatch<React.SetStateAction<any>>,
-    id: string,
-  ) => {
-    const docRef = doc(firestore, "students", id);
-    const docSnap = await getDoc(docRef);
-    if (docSnap.exists()) setter(docSnap.data());
-  },
-  addStudent: async (data: IStudent) => {
-    await addDoc(collection(firestore, "students"), data);
-  },
-  removeStudent: async (id: string) => {
-    await deleteDoc(doc(firestore, "students", id));
-  },
-  editStudent: async (id: string, data: IStudent) => {
-    const ref = doc(firestore, "students", id);
-    setDoc(ref, data, { merge: true });
-  },
-};

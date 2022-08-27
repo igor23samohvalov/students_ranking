@@ -1,29 +1,34 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
+import { useAppSelector } from "../hooks/reduxHooks";
 import Button from "../components/styles/Button.styled";
 import Container from "../components/styles/Container.styled";
 import { ProfileContainer } from "../components/styles/ProfilePage.styled";
 import { CardImg } from "../components/styles/StudentPreview.styled";
-import { fsMethods } from "../lib/firebase";
+
+const studentPlaceholder = {
+  surname: "unknown",
+  name: "unknown",
+  form: "unknown",
+  rating: 0,
+  id: "UID",
+};
 
 function ProfilePage() {
   const { id } = useParams();
+  let student = useAppSelector((state) =>
+    state.students.list.find((s) => s.id === id),
+  );
+
+  if (!student) student = studentPlaceholder;
+
   const navigate = useNavigate();
-  const [student, setStudent] = useState<any>({});
   const [entries, setEntries] = useState<string[][]>([]);
   console.log("profile page loaded");
 
   useEffect(() => {
-    console.log("show us id: ", id);
-    if (id) {
-      try {
-        fsMethods.loadStudnet(setStudent, id);
-        setEntries([]);
-      } catch (error) {
-        console.log(error);
-      }
-    }
-  }, [id]);
+    setEntries([]);
+  }, []);
 
   return (
     <Container>

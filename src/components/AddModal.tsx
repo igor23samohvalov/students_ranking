@@ -1,5 +1,6 @@
 import { Formik, FormikHelpers, Field } from "formik";
-import { fsMethods } from "../lib/firebase";
+import { useAppDispatch } from "../hooks/reduxHooks";
+import { addStudent } from "../store/studentsSlice";
 import {
   ModalContainer,
   StyledForm,
@@ -7,7 +8,6 @@ import {
 } from "./styles/AddModal.styled";
 import Button from "./styles/Button.styled";
 import CloseIcon from "./styles/CloseIcon";
-import Loader from "./styles/Loader";
 import { defaultOptions, StyledSelect } from "./styles/StyledSelect";
 
 interface IValues {
@@ -16,16 +16,13 @@ interface IValues {
   form: string;
   rating: number;
 }
-
-function AddModal({
-  isShownAddModal,
-  setAddModal,
-  addStudent,
-}: {
+type AddModalProps = {
   isShownAddModal: boolean;
   setAddModal: React.Dispatch<React.SetStateAction<boolean>>;
-  addStudent: React.Dispatch<React.SetStateAction<any>>;
-}) {
+};
+
+function AddModal({ isShownAddModal, setAddModal }: AddModalProps) {
+  const dispatch = useAppDispatch();
   const handleClick = () => {
     setAddModal(false);
   };
@@ -42,18 +39,11 @@ function AddModal({
           }}
           onSubmit={async (
             values: IValues,
-            { setSubmitting, resetForm }: FormikHelpers<IValues>,
+            { resetForm }: FormikHelpers<IValues>,
           ) => {
-            setSubmitting(true);
-            try {
-              fsMethods.addStudent({ ...values, history: [], ranking: 0 });
-              fsMethods.loadStudents(addStudent);
-              setAddModal(false);
-              resetForm();
-            } catch (error) {
-              alert(error);
-            }
-            setSubmitting(false);
+            dispatch(addStudent({ ...values, history: [], ranking: 0 }));
+            setAddModal(false);
+            resetForm();
           }}
         >
           {(formik) => (
@@ -82,9 +72,7 @@ function AddModal({
                 Рейтинг:
                 <Field type="number" name="rating" placeholder="50" />
               </label>
-              <Button type="submit">
-                {formik.isSubmitting ? <Loader /> : "Добавить"}
-              </Button>
+              <Button type="submit">Добавить</Button>
               <CloseIcon onClick={handleClick} />
             </StyledForm>
           )}

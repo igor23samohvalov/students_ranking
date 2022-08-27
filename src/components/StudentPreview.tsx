@@ -1,6 +1,7 @@
 import { useNavigate } from "react-router-dom";
+import { useAppDispatch } from "../hooks/reduxHooks";
+import { removeStudent } from "../store/studentsSlice";
 import useAuth from "../hooks/useAuth";
-import { fsMethods } from "../lib/firebase";
 import { IStudentId } from "../Types/IStudent";
 import Button from "./styles/Button.styled";
 import { Card, CardBlock, CardImg } from "./styles/StudentPreview.styled";
@@ -8,24 +9,18 @@ import { EditIcon, ProfileIcon, RemoveIcon } from "./styles/StyledIcons.styled";
 
 function StudentPreview({
   student,
-  addStudent,
   setEditModal,
 }: {
   student: IStudentId;
-  addStudent: React.Dispatch<React.SetStateAction<any>>;
   setEditModal: React.Dispatch<React.SetStateAction<any>>;
 }) {
   const { surname, name, ranking, rating, id, form } = student;
   const { user } = useAuth();
+  const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
   const handleRemove = () => {
-    try {
-      fsMethods.removeStudent(id);
-      fsMethods.loadStudents(addStudent);
-    } catch (error) {
-      alert(error);
-    }
+    dispatch(removeStudent(id));
   };
   const handleEdit = () => {
     setEditModal({ shown: true, student });

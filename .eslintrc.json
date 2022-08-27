@@ -35,6 +35,9 @@
         "jsx-a11y/label-has-associated-control": [
             "off"
         ],
+        "import/no-named-as-default": [
+            "off"
+        ],
         "react/jsx-no-constructed-context-values": [
             "warn"
         ],
@@ -48,6 +51,9 @@
                 "ignoreTypeValueShadow": null,
                 "ignoreFunctionTypeParameterNameValueShadow": null
             }
+        ],
+        "no-param-reassign": [
+            "off"
         ]
     }
 }

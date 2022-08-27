@@ -1,5 +1,6 @@
 import { Formik, FormikHelpers, Field } from "formik";
-import { fsMethods } from "../lib/firebase";
+import { useAppDispatch } from "../hooks/reduxHooks";
+import { editStudent } from "../store/studentsSlice";
 import { IStudentId } from "../Types/IStudent";
 import {
   ModalBody,
@@ -21,13 +22,12 @@ function EditModal({
   setEditModal,
   isShownEditModal,
   student,
-  addStudent,
 }: {
   setEditModal: React.Dispatch<React.SetStateAction<any>>;
   isShownEditModal: boolean;
   student: IStudentId;
-  addStudent: React.Dispatch<React.SetStateAction<any>>;
 }) {
+  const dispatch = useAppDispatch();
   const { surname, name, rating, form, id } = student;
 
   return (
@@ -43,18 +43,11 @@ function EditModal({
           enableReinitialize
           onSubmit={async (
             values: IValues,
-            { setSubmitting, resetForm }: FormikHelpers<IValues>,
+            { resetForm }: FormikHelpers<IValues>,
           ) => {
-            setSubmitting(true);
-            try {
-              fsMethods.editStudent(id, { ...values });
-              setEditModal({ student: {}, shown: false });
-              fsMethods.loadStudents(addStudent);
-              resetForm();
-            } catch (error) {
-              alert(error);
-            }
-            setSubmitting(false);
+            dispatch(editStudent({ ...values, id }));
+            setEditModal({ student: {}, shown: false });
+            resetForm();
           }}
         >
           {(formik) => (

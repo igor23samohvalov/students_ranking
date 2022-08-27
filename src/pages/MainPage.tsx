@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Container from "../components/styles/Container.styled";
 import {
   StudentsContainer,
@@ -7,24 +7,20 @@ import {
 import StudentPreview from "../components/StudentPreview";
 import Menu from "../components/Menu";
 import AddModal from "../components/AddModal";
-import { fsMethods } from "../lib/firebase";
 import { IStudentId } from "../Types/IStudent";
 import EditModal from "../components/EditModal";
 import PlaceholderStudent from "../components/PlaceholderStudent";
 import customFilter from "../lib/utility";
+import { useAppSelector } from "../hooks/reduxHooks";
 
 function MainPage() {
-  const [students, setStudents] = useState<IStudentId[]>([]);
-  const [isShownAddModal, setAddModal] = useState<boolean>(false);
+  const students = useAppSelector((state) => state.students.list);
   const [classFilter, setClassFilter] = useState<string | boolean>(false);
+  const [isShownAddModal, setAddModal] = useState<boolean>(false);
   const [isShownEditModal, setEditModal] = useState<any>({
     shown: false,
     student: {},
   });
-
-  useEffect(() => {
-    fsMethods.loadStudents(setStudents);
-  }, []);
 
   return (
     <Container>
@@ -38,22 +34,16 @@ function MainPage() {
               <StudentPreview
                 key={student.id}
                 student={student}
-                addStudent={setStudents}
                 setEditModal={setEditModal}
               />
             ))
           )}
         </StudentsContainer>
-        <AddModal
-          isShownAddModal={isShownAddModal}
-          setAddModal={setAddModal}
-          addStudent={setStudents}
-        />
+        <AddModal isShownAddModal={isShownAddModal} setAddModal={setAddModal} />
         <EditModal
           setEditModal={setEditModal}
           isShownEditModal={isShownEditModal.shown}
           student={isShownEditModal.student}
-          addStudent={setStudents}
         />
       </Wrapper>
     </Container>
