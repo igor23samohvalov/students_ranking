@@ -11,12 +11,12 @@ import { fsMethods } from "../lib/firebase";
 import { IStudentId } from "../Types/IStudent";
 import EditModal from "../components/EditModal";
 import PlaceholderStudent from "../components/PlaceholderStudent";
+import customFilter from "../lib/utility";
 
 function MainPage() {
   const [students, setStudents] = useState<IStudentId[]>([]);
-  const [filteredStudents, setFilteredStudents] = useState<IStudentId[]>([]);
   const [isShownAddModal, setAddModal] = useState<boolean>(false);
-  const [form, setForm] = useState<string | boolean>(false);
+  const [classFilter, setClassFilter] = useState<string | boolean>(false);
   const [isShownEditModal, setEditModal] = useState<any>({
     shown: false,
     student: {},
@@ -25,20 +25,16 @@ function MainPage() {
   useEffect(() => {
     fsMethods.loadStudents(setStudents);
   }, []);
-  useEffect(() => {
-    if (!form) setFilteredStudents(students);
-    else setFilteredStudents(students.filter((s) => s.form === form));
-  }, [form, students]);
 
   return (
     <Container>
       <Wrapper>
-        <Menu setAddModal={setAddModal} setForm={setForm} />
+        <Menu setAddModal={setAddModal} setClassFilter={setClassFilter} />
         <StudentsContainer>
-          {filteredStudents.length === 0 ? (
+          {customFilter(students, classFilter).length === 0 ? (
             <PlaceholderStudent />
           ) : (
-            filteredStudents.map((student: IStudentId) => (
+            customFilter(students, classFilter).map((student: IStudentId) => (
               <StudentPreview
                 key={student.id}
                 student={student}

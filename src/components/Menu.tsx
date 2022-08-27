@@ -5,16 +5,16 @@ import { StyledSelect, allOptions } from "./styles/StyledSelect";
 
 function Menu({
   setAddModal,
-  setForm,
+  setClassFilter,
 }: {
   setAddModal: React.Dispatch<React.SetStateAction<boolean>>;
-  setForm: React.Dispatch<React.SetStateAction<string | boolean>>;
+  setClassFilter: React.Dispatch<React.SetStateAction<string | boolean>>;
 }) {
   const handleClick = (): void => {
     setAddModal(true);
   };
   const handleChange = (e: any) => {
-    setForm(e.value);
+    setClassFilter(e.value);
   };
 
   return (
