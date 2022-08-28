@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Container from "../components/styles/Container.styled";
 import {
   StudentsContainer,
@@ -10,7 +10,7 @@ import AddModal from "../components/AddModal";
 import { IStudentId } from "../Types/IStudent";
 import EditModal from "../components/EditModal";
 import PlaceholderStudent from "../components/PlaceholderStudent";
-import customFilter from "../lib/utility";
+import customHandler from "../lib/utility";
 import { useAppSelector } from "../hooks/reduxHooks";
 
 function MainPage() {
@@ -22,25 +22,21 @@ function MainPage() {
     student: {},
   });
 
-  useEffect(() => {
-    console.log("loading is now: ", loading);
-  }, [loading]);
-
   return (
     <Container>
       <Wrapper>
         <Menu setAddModal={setAddModal} setClassFilter={setClassFilter} />
         <StudentsContainer>
-          {customFilter(list, classFilter).length === 0 ? (
-            <PlaceholderStudent />
-          ) : (
-            customFilter(list, classFilter).map((student: IStudentId) => (
+          {loading || customHandler(list, classFilter).length !== 0 ? (
+            customHandler(list, classFilter).map((student: IStudentId) => (
               <StudentPreview
                 key={student.id}
                 student={student}
                 setEditModal={setEditModal}
               />
             ))
+          ) : (
+            <PlaceholderStudent />
           )}
         </StudentsContainer>
         <AddModal isShownAddModal={isShownAddModal} setAddModal={setAddModal} />

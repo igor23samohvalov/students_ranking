@@ -118,6 +118,7 @@ const studentsSlice = createSlice({
           form: action.payload.form,
           rating: action.payload.rating,
         });
+        state.loading = false;
       })
       .addCase(editStudent.pending, (state) => {
         state.loading = true;
@@ -129,6 +130,7 @@ const studentsSlice = createSlice({
 
           return s;
         });
+        state.loading = false;
       })
       .addCase(removeStudent.pending, (state) => {
         state.loading = true;
@@ -136,6 +138,7 @@ const studentsSlice = createSlice({
       })
       .addCase(removeStudent.fulfilled, (state, action) => {
         state.list = state.list.filter((s) => s.id !== action.payload);
+        state.loading = false;
       })
       .addMatcher(isError, (state, action: PayloadAction<string>) => {
         state.error = action.payload;

@@ -7,6 +7,11 @@ import Container from "../components/styles/Container.styled";
 import { ProfileContainer } from "../components/styles/ProfilePage.styled";
 import { CardImg } from "../components/styles/StudentPreview.styled";
 import AddEntryModal from "../components/AddEntryModal";
+import {
+  BackIcon,
+  EntryAddIcon,
+} from "../components/styles/StyledIcons.styled";
+import Entry from "../components/Entry";
 
 const studentPlaceholder = {
   surname: "unknown",
@@ -20,9 +25,11 @@ function ProfilePage() {
   const { id } = useParams();
   const { user } = useAuth();
   const navigate = useNavigate();
+
   const entries = useAppSelector((state) =>
     state.entries.list.filter((e) => e.studentId === id),
   );
+  const loading = useAppSelector((state) => state.entries.loading);
 
   const [isAddEntryShown, showAddEntry] = useState<boolean>(false);
 
@@ -34,40 +41,38 @@ function ProfilePage() {
 
   return (
     <Container>
-      <Button onClick={() => navigate(-1)}>Назад</Button>
       <ProfileContainer>
         <div>
-          <CardImg src="../imgs/avatar_placeholder.png" alt="avatar" />
-          <p>
-            <strong>Студент: </strong>
+          <div>
+            <CardImg src="../imgs/avatar_placeholder.png" alt="avatar" />
             {student.surname} {student.name}
-          </p>
-          <p>
+          </div>
+          <div>
             <strong>Класс: </strong>
             {student.form}
-          </p>
-          <p>
+          </div>
+          <div>
             <strong>Ранк: </strong>work in progress
-          </p>
-          <p>
-            <strong>рейтинг: </strong>
+          </div>
+          <div>
+            <strong>Рейтинг: </strong>
             {student.rating}
-          </p>
+          </div>
+          <Button onClick={() => navigate(-1)}>
+            <BackIcon />
+          </Button>
         </div>
         <div>
           <h3>История изменений:</h3>
-          {user === "teacher" && (
-            <Button onClick={() => showAddEntry(true)}>Добавить запись</Button>
-          )}
-          {entries.length === 0 ? (
-            <h4>Нет записей</h4>
+          {loading || entries.length !== 0 ? (
+            entries.map((e) => <Entry key={id} data={e} />)
           ) : (
-            entries.map(({ value, comment, id }) => (
-              <p key={id}>
-                <strong>{value} - </strong>
-                {comment}
-              </p>
-            ))
+            <h4>Нет записей</h4>
+          )}
+          {user === "teacher" && (
+            <Button onClick={() => showAddEntry(true)}>
+              <EntryAddIcon />
+            </Button>
           )}
         </div>
       </ProfileContainer>

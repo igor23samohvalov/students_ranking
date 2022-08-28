@@ -2,7 +2,6 @@ import { useEffect } from "react";
 import { Outlet, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import useAuth from "../hooks/useAuth";
-// import { auth } from "../lib/firebase";
 
 const EntryCard = styled.section`
   position: absolute;
