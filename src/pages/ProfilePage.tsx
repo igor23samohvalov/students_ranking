@@ -4,7 +4,10 @@ import { useAppSelector } from "../hooks/reduxHooks";
 import useAuth from "../hooks/useAuth";
 import Button from "../components/styles/Button.styled";
 import Container from "../components/styles/Container.styled";
-import { ProfileContainer } from "../components/styles/ProfilePage.styled";
+import {
+  EntriesContainer,
+  ProfileContainer,
+} from "../components/styles/ProfilePage.styled";
 import { CardImg } from "../components/styles/StudentPreview.styled";
 import AddEntryModal from "../components/AddEntryModal";
 import {
@@ -64,22 +67,24 @@ function ProfilePage() {
         </div>
         <div>
           <h3>История изменений:</h3>
-          {loading || entries.length !== 0 ? (
-            entries.map((e) => <Entry key={id} data={e} />)
-          ) : (
-            <h4>Нет записей</h4>
-          )}
-          {user === "teacher" && (
-            <Button onClick={() => showAddEntry(true)}>
-              <EntryAddIcon />
-            </Button>
-          )}
+          <EntriesContainer>
+            {loading || entries.length !== 0 ? (
+              entries.map((e) => <Entry key={id} data={e} />)
+            ) : (
+              <h4>Нет записей</h4>
+            )}
+            {user === "teacher" && (
+              <Button onClick={() => showAddEntry(true)}>
+                <EntryAddIcon />
+              </Button>
+            )}
+          </EntriesContainer>
         </div>
       </ProfileContainer>
       <AddEntryModal
         isAddEntryShown={isAddEntryShown}
         showAddEntry={showAddEntry}
-        studentId={student.id}
+        student={student}
       />
     </Container>
   );

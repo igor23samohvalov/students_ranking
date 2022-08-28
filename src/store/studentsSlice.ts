@@ -15,6 +15,7 @@ import {
 } from "firebase/firestore";
 import { firestore } from "../lib/firebase";
 import { IStudentId, IStudent } from "../Types/IStudent";
+// import { addEntry } from "./entriesSlice";
 
 export const fetchStudents = createAsyncThunk<
   IStudentId[],
@@ -140,6 +141,16 @@ const studentsSlice = createSlice({
         state.list = state.list.filter((s) => s.id !== action.payload);
         state.loading = false;
       })
+      // .addCase(addEntry.fulfilled, (state, action) => {
+      //   const student = state.list.find((s) => {
+      //     if (s.id === action.payload.studentId) {
+      //       return { ...s, rating: s.rating + action.payload.value };
+      //     }
+      //     return s;
+      //   });
+      //   console.log(student);
+      //   console.log("state", state.list[0]);
+      // })
       .addMatcher(isError, (state, action: PayloadAction<string>) => {
         state.error = action.payload;
         state.loading = false;

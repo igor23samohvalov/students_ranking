@@ -4,6 +4,8 @@ export const EntryCard = styled.div`
   display: flex;
   gap: 1rem;
   padding: 0.5rem 0;
+  align-items: center;
+  align-self: flex-start;
 `;
 
 export const EntryValue = styled.span`

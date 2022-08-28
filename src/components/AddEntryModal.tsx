@@ -1,6 +1,8 @@
 import { Formik, FormikHelpers, Field } from "formik";
 import { useAppDispatch } from "../hooks/reduxHooks";
 import { addEntry } from "../store/entriesSlice";
+import { editStudent } from "../store/studentsSlice";
+import { IStudentId } from "../Types/IStudent";
 import {
   ModalContainer,
   StyledForm,
@@ -16,13 +18,13 @@ interface IValues {
 type AddModalProps = {
   isAddEntryShown: boolean;
   showAddEntry: React.Dispatch<React.SetStateAction<boolean>>;
-  studentId: string;
+  student: IStudentId;
 };
 
 function AddEntryModal({
   isAddEntryShown,
   showAddEntry,
-  studentId,
+  student,
 }: AddModalProps) {
   const dispatch = useAppDispatch();
   const handleClick = () => {
@@ -41,7 +43,15 @@ function AddEntryModal({
             values: IValues,
             { resetForm }: FormikHelpers<IValues>,
           ) => {
-            dispatch(addEntry({ ...values, studentId, added: "now" }));
+            dispatch(
+              addEntry({ ...values, studentId: student.id, added: "now" }),
+            );
+            dispatch(
+              editStudent({
+                ...student,
+                rating: student.rating + values.value,
+              }),
+            );
             showAddEntry(false);
             resetForm();
           }}

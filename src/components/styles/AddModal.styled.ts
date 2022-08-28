@@ -46,6 +46,7 @@ export const StyledForm = styled(Form)<IForm>`
   }
 
   > label {
+    position: relative;
     display: grid;
     grid-template-columns: ${(props) => props.inputwidth} 1fr;
     align-items: center;
@@ -55,7 +56,7 @@ export const StyledForm = styled(Form)<IForm>`
 
     input {
       font-family: "Press Start 2P", cursive;
-      border: 1px solid #451b0b;
+      border: 2px solid #451b0b;
       background-color: #fcbd80;
       padding: 1rem;
       width: 100%;
@@ -75,4 +76,14 @@ export const StyledForm = styled(Form)<IForm>`
       }
     }
   }
+`;
+
+export const ErrorMarkup = styled.div`
+  position: absolute;
+  right: 0;
+  top: 0;
+  background-color: #a10035;
+  color: #fff;
+  padding: 0.3rem;
+  font-size: 8px;
 `;

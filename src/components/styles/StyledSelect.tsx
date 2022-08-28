@@ -20,8 +20,7 @@ export const StyledSelect = styled(Select).attrs({
     control: (provided) => ({
       ...provided,
       backgroundColor: "#fcbd80",
-      borderRadius: "5px",
-      border: "1px solid #451b0b",
+      border: "2px solid #451b0b",
     }),
     option: (provided, state) => ({
       ...provided,

@@ -1,14 +1,22 @@
 import { Formik, FormikHelpers, Field } from "formik";
+import * as Yup from "yup";
 import { useAppDispatch } from "../hooks/reduxHooks";
 import { addStudent } from "../store/studentsSlice";
 import {
   ModalContainer,
   StyledForm,
   ModalBody,
+  ErrorMarkup,
 } from "./styles/AddModal.styled";
 import Button from "./styles/Button.styled";
 import CloseIcon from "./styles/CloseIcon";
 import { defaultOptions, StyledSelect } from "./styles/StyledSelect";
+
+const addStudentSchema = Yup.object().shape({
+  name: Yup.string().required("Обязательное поле"),
+  surname: Yup.string().required("Обязательное поле"),
+  rating: Yup.number().required("Обязательное поли"),
+});
 
 interface IValues {
   name: string;
@@ -37,24 +45,50 @@ function AddModal({ isShownAddModal, setAddModal }: AddModalProps) {
             form: "",
             rating: 0,
           }}
+          validationSchema={addStudentSchema}
           onSubmit={async (
             values: IValues,
             { resetForm }: FormikHelpers<IValues>,
           ) => {
+            if (!values.form) values.form = "10A";
             dispatch(addStudent({ ...values, history: [], ranking: 0 }));
             setAddModal(false);
             resetForm();
           }}
         >
-          {(formik) => (
+          {({ setFieldValue, errors, touched }) => (
             <StyledForm inputwidth="0.5fr">
               <label>
                 Имя:
-                <Field type="text" name="name" placeholder="Иван" />
+                <Field
+                  type="text"
+                  name="name"
+                  placeholder="Иван"
+                  style={{
+                    border: `2px solid${
+                      errors.name && touched.name ? "#a10035" : "#451b0b"
+                    }`,
+                  }}
+                />
+                {errors.name && touched.name ? (
+                  <ErrorMarkup>{errors.name}</ErrorMarkup>
+                ) : null}
               </label>
               <label>
                 Фамилия:
-                <Field type="text" name="surname" placeholder="Иванов" />
+                <Field
+                  type="text"
+                  name="surname"
+                  placeholder="Иванов"
+                  style={{
+                    border: `2px solid${
+                      errors.surname && touched.surname ? "#a10035" : "#451b0b"
+                    }`,
+                  }}
+                />
+                {errors.surname && touched.surname ? (
+                  <ErrorMarkup>{errors.surname}</ErrorMarkup>
+                ) : null}
               </label>
               <label>
                 Класс:
@@ -62,15 +96,28 @@ function AddModal({ isShownAddModal, setAddModal }: AddModalProps) {
                   name="form"
                   placeholder="10А"
                   options={defaultOptions}
+                  defaultValue={defaultOptions[0]}
                   isSearchable={false}
                   onChange={(e: any) => {
-                    formik.setFieldValue("form", e.value);
+                    setFieldValue("form", e.value);
                   }}
                 />
               </label>
               <label>
                 Рейтинг:
-                <Field type="number" name="rating" placeholder="50" />
+                <Field
+                  type="number"
+                  name="rating"
+                  placeholder="50"
+                  style={{
+                    border: `2px solid${
+                      errors.rating && touched.rating ? "#a10035" : "#451b0b"
+                    }`,
+                  }}
+                />
+                {errors.rating && touched.rating ? (
+                  <ErrorMarkup>{errors.rating}</ErrorMarkup>
+                ) : null}
               </label>
               <Button type="submit">Добавить</Button>
               <CloseIcon onClick={handleClick} />

@@ -8,7 +8,7 @@ export const ProfileContainer = styled.section`
   border: 2px solid #451b0b;
   border-radius: 10px;
   max-width: 828px;
-  min-height: 500px;
+  max-height: 500px;
   margin: 0 auto;
 
   > div {
@@ -57,4 +57,24 @@ export const ProfileContainer = styled.section`
   }
 `;
 
-export const Placeholder = 1;
+export const EntriesContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  overflow: auto;
+  padding-bottom: 1rem;
+  padding-right: 0.2rem;
+
+  ::-webkit-scrollbar {
+    width: 10px;
+  }
+  ::-webkit-scrollbar-track {
+    background-color: hsla(37, 100%, 68%, 0.14);
+    border-radius: 100px;
+  }
+  ::-webkit-scrollbar-thumb {
+    border-radius: 100px;
+    background-color: #b47c57;
+    box-shadow: inset 2px 2px 5px 0 rgba(#b47c57, 0.5);
+  }
+`;
