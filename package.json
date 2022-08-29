@@ -33,7 +33,8 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "lint": "eslint .",
-    "lint:fix": "eslint --fix ."
+    "lint:fix": "eslint --fix .",
+    "stopall": "lsof -t -i:8080 -i:9099 | xargs kill -9"
   },
   "eslintConfig": {
     "extends": [

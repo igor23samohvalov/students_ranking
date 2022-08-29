@@ -12,11 +12,16 @@ import EditModal from "../components/EditModal";
 import PlaceholderStudent from "../components/PlaceholderStudent";
 import customHandler from "../lib/utility";
 import { useAppSelector } from "../hooks/reduxHooks";
+import RemoveModal from "../components/RemoveModal";
 
 function MainPage() {
   const { list, loading } = useAppSelector((state) => state.students);
   const [classFilter, setClassFilter] = useState<string | boolean>(false);
   const [isShownAddModal, setAddModal] = useState<boolean>(false);
+  const [isShownRemoveModal, setRemoveModal] = useState({
+    shown: false,
+    id: "",
+  });
   const [isShownEditModal, setEditModal] = useState<any>({
     shown: false,
     student: {},
@@ -33,6 +38,7 @@ function MainPage() {
                 key={student.id}
                 student={student}
                 setEditModal={setEditModal}
+                setRemoveModal={setRemoveModal}
               />
             ))
           ) : (
@@ -44,6 +50,11 @@ function MainPage() {
           setEditModal={setEditModal}
           isShownEditModal={isShownEditModal.shown}
           student={isShownEditModal.student}
+        />
+        <RemoveModal
+          setRemoveModal={setRemoveModal}
+          isShownRemoveModal={isShownRemoveModal.shown}
+          id={isShownRemoveModal.id}
         />
       </Wrapper>
     </Container>

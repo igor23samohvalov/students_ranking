@@ -5,7 +5,7 @@ export const Card = styled(motion.div)`
   display: flex;
   justify-content: space-between;
   background-color: #e9d2b8;
-  border: 5px solid #b8a590;
+  border: 5px solid #bc8c61;
   margin-bottom: 2rem;
   width: 100%;
 `;
@@ -35,7 +35,6 @@ export const CardBlock = styled.div`
     flex-direction: row;
     align-items: center;
     margin-left: auto;
-    border-left: 5px solid #b8a590;
     padding: 1rem 2rem;
 
     > button {

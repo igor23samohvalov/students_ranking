@@ -1,6 +1,4 @@
 import { useNavigate } from "react-router-dom";
-import { useAppDispatch } from "../hooks/reduxHooks";
-import { removeStudent } from "../store/studentsSlice";
 import useAuth from "../hooks/useAuth";
 import { IStudentId } from "../Types/IStudent";
 import Button from "./styles/Button.styled";
@@ -10,18 +8,20 @@ import { EditIcon, ProfileIcon, RemoveIcon } from "./styles/StyledIcons.styled";
 function StudentPreview({
   student,
   setEditModal,
+  setRemoveModal,
 }: {
   student: IStudentId;
   setEditModal: React.Dispatch<React.SetStateAction<any>>;
+  setRemoveModal: React.Dispatch<React.SetStateAction<any>>;
 }) {
   const { surname, name, ranking, rating, id, form } = student;
   const { user } = useAuth();
-  const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
   const handleRemove = () => {
-    dispatch(removeStudent(id));
+    setRemoveModal({ shown: true, id });
   };
+
   const handleEdit = () => {
     setEditModal({ shown: true, student });
   };
