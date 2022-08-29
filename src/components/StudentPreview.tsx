@@ -33,13 +33,15 @@ function StudentPreview({
       transition={{ duration: 0.2 }}
     >
       <CardBlock>
+        <span>{ranking === undefined || ranking > 5 ? "?" : ranking}</span>
+      </CardBlock>
+      <CardBlock>
         <CardImg src="./imgs/avatar_placeholder.png" alt="avatar" />
       </CardBlock>
       <CardBlock>
         <h3>
           {surname} {name}, {form}
         </h3>
-        <h4>Ранг: {ranking}</h4>
         <p>Рейтинг: {rating}</p>
       </CardBlock>
 

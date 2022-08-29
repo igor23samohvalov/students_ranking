@@ -10,7 +10,7 @@ export const Card = styled(motion.div)`
   width: 100%;
 `;
 
-export const CardTytle = styled.h3`
+export const CardTitle = styled.h3`
   font-family: "Press Start 2P", cursive;
   text-transform: uppercase;
   margin: 2rem auto;
@@ -28,7 +28,10 @@ export const CardBlock = styled.div`
   }
 
   &:first-of-type {
-    padding-left: 2rem;
+    font-family: "Press Start 2P", cursive;
+    color: #cd7f32;
+    font-size: 20px;
+    padding-left: 1rem;
   }
   &:last-of-type {
     display: flex;

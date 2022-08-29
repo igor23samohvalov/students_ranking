@@ -54,12 +54,16 @@ export const StyledForm = styled(Form)<IForm>`
     align-items: center;
     justify-items: end;
 
-    input {
+    input,
+    textarea {
       font-family: "Press Start 2P", cursive;
       border: 2px solid #451b0b;
       background-color: #fcbd80;
       padding: 1rem;
       width: 100%;
+    }
+    textarea {
+      grid-column: span 2;
     }
   }
   > div {

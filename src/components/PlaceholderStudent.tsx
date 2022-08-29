@@ -1,4 +1,4 @@
-import { Card, CardTytle } from "./styles/StudentPreview.styled";
+import { Card, CardTitle } from "./styles/StudentPreview.styled";
 
 function PlaceholderStudent() {
   return (
@@ -7,7 +7,7 @@ function PlaceholderStudent() {
       animate={{ opacity: 1, scale: 1 }}
       transition={{ duration: 0.2 }}
     >
-      <CardTytle>Студентов нет</CardTytle>
+      <CardTitle>Студентов нет</CardTitle>
     </Card>
   );
 }

@@ -1,4 +1,5 @@
 import { Formik, FormikHelpers, Field } from "formik";
+import * as Yup from "yup";
 import { useAppDispatch } from "../hooks/reduxHooks";
 import { addEntry } from "../store/entriesSlice";
 import { editStudent } from "../store/studentsSlice";
@@ -7,9 +8,15 @@ import {
   ModalContainer,
   StyledForm,
   ModalBody,
+  ErrorMarkup,
 } from "./styles/AddModal.styled";
 import Button from "./styles/Button.styled";
 import CloseIcon from "./styles/CloseIcon";
+
+const addEntrySchema = Yup.object().shape({
+  value: Yup.number().required("Обязательное поле"),
+  comment: Yup.string().required("Обязательное поле"),
+});
 
 interface IValues {
   value: number;
@@ -39,6 +46,7 @@ function AddEntryModal({
             value: 0,
             comment: "",
           }}
+          validationSchema={addEntrySchema}
           onSubmit={async (
             values: IValues,
             { resetForm }: FormikHelpers<IValues>,
@@ -56,15 +64,41 @@ function AddEntryModal({
             resetForm();
           }}
         >
-          {() => (
-            <StyledForm inputwidth="0.5fr">
+          {({ errors, touched }) => (
+            <StyledForm inputwidth="0.2fr">
               <label>
                 Баллы:
-                <Field type="number" name="value" placeholder="0" />
+                <Field
+                  type="number"
+                  name="value"
+                  placeholder="0"
+                  style={{
+                    border: `2px solid${
+                      errors.value && touched.value ? "#a10035" : "#451b0b"
+                    }`,
+                  }}
+                />
+                {errors.value && touched.value ? (
+                  <ErrorMarkup>{errors.value}</ErrorMarkup>
+                ) : null}
               </label>
               <label>
                 Комментарий:
-                <Field type="text" name="comment" placeholder="Ко" />
+                <Field
+                  component="textarea"
+                  type="text"
+                  name="comment"
+                  placeholder="Ко"
+                  rows="4"
+                  style={{
+                    border: `2px solid${
+                      errors.comment && touched.comment ? "#a10035" : "#451b0b"
+                    }`,
+                  }}
+                />
+                {errors.comment && touched.comment ? (
+                  <ErrorMarkup>{errors.comment}</ErrorMarkup>
+                ) : null}
               </label>
               <Button type="submit">Добавить</Button>
               <CloseIcon onClick={handleClick} />

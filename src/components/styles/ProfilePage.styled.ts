@@ -8,7 +8,7 @@ export const ProfileContainer = styled.section`
   border: 2px solid #451b0b;
   border-radius: 10px;
   max-width: 828px;
-  max-height: 500px;
+  height: 550px;
   margin: 0 auto;
 
   > div {
@@ -50,10 +50,18 @@ export const ProfileContainer = styled.section`
       background-color: #ece4e4;
       border-radius: 10px 0 0 10px;
 
+      @media (max-width: 768px) {
+        border-radius: 10px 10px 0 0;
+      }
+
       button {
         align-self: flex-end;
       }
     }
+  }
+
+  @media (max-width: 768px) {
+    flex-direction: column;
   }
 `;
 
@@ -62,8 +70,8 @@ export const EntriesContainer = styled.div`
   flex-direction: column;
   gap: 1rem;
   overflow: auto;
-  padding-bottom: 1rem;
   padding-right: 0.2rem;
+  height: 100%;
 
   ::-webkit-scrollbar {
     width: 10px;
