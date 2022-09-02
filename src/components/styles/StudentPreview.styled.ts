@@ -2,12 +2,18 @@ import styled from "styled-components";
 import { motion } from "framer-motion";
 
 export const Card = styled(motion.div)`
+  font-family: "Press Start 2P", cursive;
   display: flex;
   justify-content: space-between;
   background-color: #e9d2b8;
-  border: 5px solid #bc8c61;
-  margin-bottom: 2rem;
+  border-bottom: 1px solid #bc8c61;
   width: 100%;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+
+  // &:hover {
+  //   box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+  // }
 `;
 
 export const CardTitle = styled.h3`
@@ -26,6 +32,12 @@ export const CardBlock = styled.div`
   > * {
     margin: 0;
   }
+  h4 {
+    font-size: 15px;
+  }
+  span {
+    font-size: 14px;
+  }
 
   &:first-of-type {
     font-family: "Press Start 2P", cursive;
@@ -42,7 +54,6 @@ export const CardBlock = styled.div`
 
     > button {
       padding: 0.5rem;
-      box-shadow: none;
       height: fit-content;
       width: fit-content;
     }

@@ -22,7 +22,7 @@ export function ProfileIcon() {
 
 export function RemoveIcon() {
   return (
-    <IconContext.Provider value={{ size: "2em", color: "#fff" }}>
+    <IconContext.Provider value={{ size: "2em", color: "#a10035" }}>
       <IoPersonRemoveSharp />
     </IconContext.Provider>
   );

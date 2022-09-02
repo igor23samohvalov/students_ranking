@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import useAuth from "../hooks/useAuth";
 import { IStudentId } from "../Types/IStudent";
-import Button from "./styles/Button.styled";
+import Button from "./styles/ButtonIcon.styled";
 import { Card, CardBlock, CardImg } from "./styles/StudentPreview.styled";
 import { EditIcon, ProfileIcon, RemoveIcon } from "./styles/StyledIcons.styled";
 
@@ -39,10 +39,10 @@ function StudentPreview({
         <CardImg src="./imgs/avatar_placeholder.png" alt="avatar" />
       </CardBlock>
       <CardBlock>
-        <h3>
+        <h4>
           {surname} {name}, {form}
-        </h3>
-        <p>Рейтинг: {rating}</p>
+        </h4>
+        <span>Рейтинг: {rating}</span>
       </CardBlock>
 
       <CardBlock>
@@ -54,7 +54,7 @@ function StudentPreview({
             <Button onClick={handleEdit}>
               <EditIcon />
             </Button>
-            <Button onClick={handleRemove} style={{ background: "#a10035" }}>
+            <Button onClick={handleRemove}>
               <RemoveIcon />
             </Button>
           </>

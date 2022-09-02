@@ -9,10 +9,11 @@ import Menu from "../components/Menu";
 import AddModal from "../components/AddModal";
 import { IStudentId } from "../Types/IStudent";
 import EditModal from "../components/EditModal";
-import PlaceholderStudent from "../components/PlaceholderStudent";
+// import PlaceholderStudent from "../components/PlaceholderStudent";
 import customHandler from "../lib/utility";
 import { useAppSelector } from "../hooks/reduxHooks";
 import RemoveModal from "../components/RemoveModal";
+import Loader from "../components/styles/Loader";
 
 function MainPage() {
   const { list, loading } = useAppSelector((state) => state.students);
@@ -32,18 +33,23 @@ function MainPage() {
       <Wrapper>
         <Menu setAddModal={setAddModal} setClassFilter={setClassFilter} />
         <StudentsContainer>
-          {loading || customHandler(list, classFilter).length !== 0 ? (
-            customHandler(list, classFilter).map((student: IStudentId) => (
-              <StudentPreview
-                key={student.id}
-                student={student}
-                setEditModal={setEditModal}
-                setRemoveModal={setRemoveModal}
-              />
-            ))
-          ) : (
-            <PlaceholderStudent />
-          )}
+          <div />
+          <div>
+            {loading ? (
+              <Loader />
+            ) : (
+              // <PlaceholderStudent />
+              customHandler(list, classFilter).map((student: IStudentId) => (
+                <StudentPreview
+                  key={student.id}
+                  student={student}
+                  setEditModal={setEditModal}
+                  setRemoveModal={setRemoveModal}
+                />
+              ))
+            )}
+          </div>
+          <div />
         </StudentsContainer>
         <AddModal isShownAddModal={isShownAddModal} setAddModal={setAddModal} />
         <EditModal
