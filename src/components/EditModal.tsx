@@ -18,6 +18,7 @@ const editStudentSchema = Yup.object().shape({
   name: Yup.string().required("Обязательное поле"),
   surname: Yup.string().required("Обязательное поле"),
   rating: Yup.number().required("Обязательное поли"),
+  email: Yup.string().email("Неправильный email").required("Обязательное поле"),
 });
 
 interface IValues {
@@ -25,6 +26,7 @@ interface IValues {
   surname: string;
   form: string;
   rating: number;
+  email: string;
 }
 
 function EditModal({
@@ -37,7 +39,7 @@ function EditModal({
   student: IStudentId;
 }) {
   const dispatch = useAppDispatch();
-  const { surname, name, rating, form, id } = student;
+  const { surname, name, rating, form, id, email } = student;
   const [formIndex, setFormIndex] = useState<number>(0);
 
   useEffect(() => {
@@ -53,6 +55,7 @@ function EditModal({
             surname,
             form,
             rating,
+            email,
           }}
           validationSchema={editStudentSchema}
           enableReinitialize
@@ -97,6 +100,22 @@ function EditModal({
                 />
                 {errors.surname && touched.surname ? (
                   <ErrorMarkup>{errors.surname}</ErrorMarkup>
+                ) : null}
+              </label>
+              <label>
+                Email:
+                <Field
+                  type="email"
+                  name="email"
+                  placeholder="ivanov@mail.com"
+                  style={{
+                    border: `2px solid${
+                      errors.email && touched.email ? "#a10035" : "#451b0b"
+                    }`,
+                  }}
+                />
+                {errors.email && touched.email ? (
+                  <ErrorMarkup>{errors.email}</ErrorMarkup>
                 ) : null}
               </label>
               <label>

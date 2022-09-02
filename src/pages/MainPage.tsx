@@ -5,6 +5,7 @@ import {
   Wrapper,
 } from "../components/styles/MainPage.styled";
 import StudentPreview from "../components/StudentPreview";
+import useAuth from "../hooks/useAuth";
 import Menu from "../components/Menu";
 import AddModal from "../components/AddModal";
 import { IStudentId } from "../Types/IStudent";
@@ -14,8 +15,11 @@ import customHandler from "../lib/utility";
 import { useAppSelector } from "../hooks/reduxHooks";
 import RemoveModal from "../components/RemoveModal";
 import Loader from "../components/styles/Loader";
+import { AddStudentIcon } from "../components/styles/StyledIcons.styled";
+import ButtonIcon from "../components/styles/ButtonIcon.styled";
 
 function MainPage() {
+  const { user } = useAuth();
   const { list, loading } = useAppSelector((state) => state.students);
   const [classFilter, setClassFilter] = useState<string | boolean>(false);
   const [isShownAddModal, setAddModal] = useState<boolean>(false);
@@ -31,14 +35,13 @@ function MainPage() {
   return (
     <Container>
       <Wrapper>
-        <Menu setAddModal={setAddModal} setClassFilter={setClassFilter} />
+        <Menu setClassFilter={setClassFilter} />
         <StudentsContainer>
           <div />
           <div>
             {loading ? (
               <Loader />
             ) : (
-              // <PlaceholderStudent />
               customHandler(list, classFilter).map((student: IStudentId) => (
                 <StudentPreview
                   key={student.id}
@@ -49,7 +52,13 @@ function MainPage() {
               ))
             )}
           </div>
-          <div />
+          <div>
+            {user === "teacher" ? (
+              <ButtonIcon onClick={() => setAddModal(true)}>
+                <AddStudentIcon />
+              </ButtonIcon>
+            ) : null}
+          </div>
         </StudentsContainer>
         <AddModal isShownAddModal={isShownAddModal} setAddModal={setAddModal} />
         <EditModal
@@ -58,8 +67,9 @@ function MainPage() {
           student={isShownEditModal.student}
         />
         <RemoveModal
-          setRemoveModal={setRemoveModal}
-          isShownRemoveModal={isShownRemoveModal.shown}
+          entity="student"
+          showModal={setRemoveModal}
+          isShown={isShownRemoveModal.shown}
           id={isShownRemoveModal.id}
         />
       </Wrapper>

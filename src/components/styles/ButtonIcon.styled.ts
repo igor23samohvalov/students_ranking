@@ -9,7 +9,6 @@ export default styled.button`
   border-radius: 50%;
 
   &:hover {
-    color: #224b0c;
     scale: 1.1;
   }
 `;

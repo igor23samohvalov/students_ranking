@@ -16,6 +16,7 @@ const addStudentSchema = Yup.object().shape({
   name: Yup.string().required("Обязательное поле"),
   surname: Yup.string().required("Обязательное поле"),
   rating: Yup.number().required("Обязательное поли"),
+  email: Yup.string().email("Неправильный email").required("Обязательное поле"),
 });
 
 interface IValues {
@@ -23,6 +24,7 @@ interface IValues {
   surname: string;
   form: string;
   rating: number;
+  email: string;
 }
 type AddModalProps = {
   isShownAddModal: boolean;
@@ -44,13 +46,14 @@ function AddModal({ isShownAddModal, setAddModal }: AddModalProps) {
             surname: "",
             form: "",
             rating: 0,
+            email: "",
           }}
           validationSchema={addStudentSchema}
           onSubmit={async (
             values: IValues,
             { resetForm }: FormikHelpers<IValues>,
           ) => {
-            if (!values.form) values.form = "10A";
+            if (!values.form) values.form = "10А";
             dispatch(addStudent({ ...values, history: [], ranking: 0 }));
             setAddModal(false);
             resetForm();
@@ -88,6 +91,22 @@ function AddModal({ isShownAddModal, setAddModal }: AddModalProps) {
                 />
                 {errors.surname && touched.surname ? (
                   <ErrorMarkup>{errors.surname}</ErrorMarkup>
+                ) : null}
+              </label>
+              <label>
+                Email:
+                <Field
+                  type="email"
+                  name="email"
+                  placeholder="ivanov@mail.com"
+                  style={{
+                    border: `2px solid${
+                      errors.email && touched.email ? "#a10035" : "#451b0b"
+                    }`,
+                  }}
+                />
+                {errors.email && touched.email ? (
+                  <ErrorMarkup>{errors.email}</ErrorMarkup>
                 ) : null}
               </label>
               <label>

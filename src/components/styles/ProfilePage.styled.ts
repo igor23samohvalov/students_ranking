@@ -66,9 +66,9 @@ export const ProfileContainer = styled.section`
 `;
 
 export const EntriesContainer = styled.div`
+  position: relative;
   display: flex;
   flex-direction: column;
-  gap: 1rem;
   overflow: auto;
   padding-right: 0.2rem;
   height: 100%;

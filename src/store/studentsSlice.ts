@@ -118,6 +118,7 @@ const studentsSlice = createSlice({
           surname: action.payload.surname,
           form: action.payload.form,
           rating: action.payload.rating,
+          email: action.payload.email,
         });
         state.loading = false;
       })

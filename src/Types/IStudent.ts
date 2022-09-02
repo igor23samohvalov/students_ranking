@@ -5,6 +5,7 @@ export interface IStudent {
   rating: number;
   history?: (number | string)[];
   ranking?: number;
+  email: string;
 }
 
 export interface IStudentId extends IStudent {

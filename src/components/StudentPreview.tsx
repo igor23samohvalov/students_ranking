@@ -3,7 +3,11 @@ import useAuth from "../hooks/useAuth";
 import { IStudentId } from "../Types/IStudent";
 import Button from "./styles/ButtonIcon.styled";
 import { Card, CardBlock, CardImg } from "./styles/StudentPreview.styled";
-import { EditIcon, ProfileIcon, RemoveIcon } from "./styles/StyledIcons.styled";
+import {
+  EditIcon,
+  ProfileIcon,
+  RemoveStudentIcon,
+} from "./styles/StyledIcons.styled";
 
 function StudentPreview({
   student,
@@ -44,7 +48,6 @@ function StudentPreview({
         </h4>
         <span>Рейтинг: {rating}</span>
       </CardBlock>
-
       <CardBlock>
         <Button onClick={() => navigate(id)}>
           <ProfileIcon />
@@ -55,7 +58,7 @@ function StudentPreview({
               <EditIcon />
             </Button>
             <Button onClick={handleRemove}>
-              <RemoveIcon />
+              <RemoveStudentIcon />
             </Button>
           </>
         ) : null}

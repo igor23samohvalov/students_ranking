@@ -26,7 +26,7 @@ export const fetchEntries = createAsyncThunk<
 
     const q = query(collection(firestore, "entries"));
     const querySnapshot = await getDocs(q);
-    querySnapshot.forEach((doc) => entries.push(doc.data()));
+    querySnapshot.forEach((doc) => entries.push({ ...doc.data(), id: doc.id }));
 
     return entries;
   } catch (error: any) {
@@ -115,6 +115,7 @@ const entriesSlice = createSlice({
           comment: action.payload.comment,
           value: action.payload.value,
         });
+        state.loading = false;
       })
       .addCase(editEntry.pending, (state) => {
         state.loading = true;
@@ -126,6 +127,7 @@ const entriesSlice = createSlice({
 
           return e;
         });
+        state.loading = false;
       })
       .addCase(removeEntry.pending, (state) => {
         state.loading = true;
@@ -133,6 +135,7 @@ const entriesSlice = createSlice({
       })
       .addCase(removeEntry.fulfilled, (state, action) => {
         state.list = state.list.filter((e) => e.id !== action.payload);
+        state.loading = false;
       })
       .addMatcher(isError, (state, action: PayloadAction<string>) => {
         state.error = action.payload;

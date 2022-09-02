@@ -1,8 +1,12 @@
 import { IconContext } from "react-icons";
-import { IoSettings, IoPersonRemoveSharp } from "react-icons/io5";
+import {
+  IoSettings,
+  IoPersonRemoveSharp,
+  IoPersonAddSharp,
+} from "react-icons/io5";
 import { CgProfile } from "react-icons/cg";
 import { MdNoteAdd } from "react-icons/md";
-import { TbArrowBack } from "react-icons/tb";
+import { TbArrowBack, TbNotesOff } from "react-icons/tb";
 
 export function EditIcon() {
   return (
@@ -20,10 +24,26 @@ export function ProfileIcon() {
   );
 }
 
-export function RemoveIcon() {
+export function RemoveStudentIcon() {
   return (
     <IconContext.Provider value={{ size: "2em", color: "#a10035" }}>
       <IoPersonRemoveSharp />
+    </IconContext.Provider>
+  );
+}
+
+export function RemoveEntryIcon() {
+  return (
+    <IconContext.Provider value={{ size: "2em", color: "#a10035" }}>
+      <TbNotesOff />
+    </IconContext.Provider>
+  );
+}
+
+export function AddStudentIcon() {
+  return (
+    <IconContext.Provider value={{ size: "2em", color: "#fff" }}>
+      <IoPersonAddSharp />
     </IconContext.Provider>
   );
 }

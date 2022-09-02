@@ -1,41 +1,40 @@
-import React from "react";
 import { ModalContainer, ModalBody } from "./styles/AddModal.styled";
 import { useAppDispatch } from "../hooks/reduxHooks";
 import { removeStudent } from "../store/studentsSlice";
 import Button from "./styles/Button.styled";
 import { ButtonBlock, Title } from "./styles/RemoveModal.styled";
+import { removeEntry } from "../store/entriesSlice";
 
 type RemoveModalProps = {
-  setRemoveModal: React.Dispatch<React.SetStateAction<any>>;
-  isShownRemoveModal: boolean;
+  showModal: React.Dispatch<React.SetStateAction<any>>;
+  isShown: boolean;
   id: string;
+  entity: string;
 };
 
-function RemoveModal({
-  setRemoveModal,
-  isShownRemoveModal,
-  id,
-}: RemoveModalProps) {
+function RemoveModal({ showModal, isShown, id, entity }: RemoveModalProps) {
   const dispatch = useAppDispatch();
 
   const handleClose = () => {
-    setRemoveModal({
+    showModal({
       shown: false,
       id: "",
     });
   };
   const handleRemove = () => {
-    dispatch(removeStudent(id));
+    if (entity === "student") dispatch(removeStudent(id));
+    else dispatch(removeEntry(id));
+
     handleClose();
   };
 
   return (
-    <ModalContainer display={Number(isShownRemoveModal)}>
+    <ModalContainer display={Number(isShown)}>
       <ModalBody>
-        <Title>Удалить студента?</Title>
+        <Title>Удалить {entity === "student" ? "студента" : "запись"}?</Title>
         <ButtonBlock>
-          <Button onClick={handleClose}>Помиловать</Button>
-          <Button onClick={handleRemove}>Отчислить</Button>
+          <Button onClick={handleClose}>Оставить</Button>
+          <Button onClick={handleRemove}>Удалить</Button>
         </ButtonBlock>
       </ModalBody>
     </ModalContainer>

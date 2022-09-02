@@ -15,6 +15,9 @@ import {
   EntryAddIcon,
 } from "../components/styles/StyledIcons.styled";
 import Entry from "../components/Entry";
+import Loader from "../components/styles/Loader";
+import EditEntryModal from "../components/EditEntryModal";
+import RemoveModal from "../components/RemoveModal";
 
 const studentPlaceholder = {
   surname: "unknown",
@@ -22,6 +25,7 @@ const studentPlaceholder = {
   form: "unknown",
   rating: 0,
   id: "UID",
+  email: "ivanov@mail.com",
 };
 
 function ProfilePage() {
@@ -34,6 +38,14 @@ function ProfilePage() {
   );
   const loading = useAppSelector((state) => state.entries.loading);
 
+  const [isEditEntryShown, showEditEntry] = useState<any>({
+    shown: false,
+    entry: {},
+  });
+  const [isRemoveEntryShown, showRemoveEntry] = useState({
+    shown: false,
+    id: "",
+  });
   const [isAddEntryShown, showAddEntry] = useState<boolean>(false);
 
   let student = useAppSelector((state) =>
@@ -68,10 +80,17 @@ function ProfilePage() {
         <div>
           <h3>История изменений:</h3>
           <EntriesContainer>
-            {loading || entries.length !== 0 ? (
-              entries.map((e) => <Entry key={id} data={e} />)
+            {loading ? (
+              <Loader />
             ) : (
-              <h4>Нет записей</h4>
+              entries.map((e) => (
+                <Entry
+                  key={id}
+                  data={e}
+                  showEditEntry={showEditEntry}
+                  showRemoveEntry={showRemoveEntry}
+                />
+              ))
             )}
             {user === "teacher" && (
               <Button onClick={() => showAddEntry(true)}>
@@ -85,6 +104,17 @@ function ProfilePage() {
         isAddEntryShown={isAddEntryShown}
         showAddEntry={showAddEntry}
         student={student}
+      />
+      <EditEntryModal
+        isShown={isEditEntryShown.shown}
+        showModal={showEditEntry}
+        entry={isEditEntryShown.entry}
+      />
+      <RemoveModal
+        entity="entry"
+        isShown={isRemoveEntryShown.shown}
+        showModal={showRemoveEntry}
+        id={isRemoveEntryShown.id}
       />
     </Container>
   );

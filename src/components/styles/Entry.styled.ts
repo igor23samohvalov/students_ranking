@@ -6,6 +6,13 @@ export const EntryCard = styled.div`
   padding: 0.5rem 0;
   align-items: center;
   align-self: flex-start;
+  font-size: 11px;
+  width: 100%;
+
+  > div:last-of-type {
+    margin-left: auto;
+    min-width: fit-content;
+  }
 `;
 
 export const EntryValue = styled.span`

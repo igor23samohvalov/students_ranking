@@ -20,16 +20,18 @@ export const StudentsContainer = styled.section`
   height: 80vh;
   
   > div {
-    border: 2px solid #bc8c61;
+    border: 4px solid #bc8c61;
   }
   > div:first-of-type, > div:last-of-type {
     background-color: #bc8c61;
     border-radius: 3rem 3rem 0 0;
-    height: 40px;
+    height: 6rem;
     // box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
   }
   > div:last-of-type {
     border-radius: 0 0 3rem 3rem;
+    display: flex;
+    justify-content: center;
   }
   > div:nth-of-type(2) {
     overflow: auto;

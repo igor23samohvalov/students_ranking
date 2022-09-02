@@ -18,7 +18,7 @@ const GlobalStyles = createGlobalStyle`
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     box-sizing: border-box;
-    background: url("./imgs/bg.png") center / cover no-repeat;
+    background: url("${window.location.origin}/imgs/bg.png") center / cover no-repeat;
     height: 100vh;
   }
   code {

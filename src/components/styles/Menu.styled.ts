@@ -8,8 +8,10 @@ export const MenuContainer = styled.section`
   width: 30%;
   height: fit-content;
   padding: 2rem;
-  background-color: #b8a590;
+  border: 2px solid #bc8c61;
+  background-color: #e9d2b8;
   gap: 2rem;
+  text-align: center;
 
   h4 {
     margin: 0;
