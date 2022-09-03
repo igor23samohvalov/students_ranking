@@ -32,7 +32,7 @@ function Entry({
       </EntryValue>
       <span>{comment}</span>
       <div>
-        {user === "teacher" ? (
+        {user.role === "teacher" ? (
           <>
             <ButtonIconStyled onClick={handleEdit}>
               <EditIcon />

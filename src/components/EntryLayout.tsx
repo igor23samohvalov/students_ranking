@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import { ToastContainer } from "react-toastify";
 import { Outlet, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import useAuth from "../hooks/useAuth";
@@ -20,12 +21,19 @@ function EntryLayout() {
   const { user } = useAuth();
 
   useEffect(() => {
-    if (user) navigate("/main");
+    if (user.role) navigate("/main");
   }, [user]);
 
   return (
     <EntryCard>
       <Outlet />
+      <ToastContainer
+        position="top-center"
+        autoClose={3000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+      />
     </EntryCard>
   );
 }

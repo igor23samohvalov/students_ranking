@@ -1,26 +1,34 @@
 import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 import Wrapper from "./styles/Navbar.styled";
 import Button from "./styles/Button.styled";
 import Container from "./styles/Container.styled";
 import useAuth from "../hooks/useAuth";
+import ProfileModal from "./ProfileModal";
 
 function Header() {
   const { logOut } = useAuth();
   const navigate = useNavigate();
 
-  const handleClick = () => {
+  const [profileModal, showProfileModal] = useState<boolean>(false);
+
+  const handleLogOut = () => {
     logOut();
     navigate("/");
+  };
+  const handleProfile = () => {
+    showProfileModal(true);
   };
 
   return (
     <header>
       <Container>
         <Wrapper>
-          <Button>Профиль</Button>
-          <Button onClick={handleClick}>Выйти</Button>
+          <Button onClick={handleProfile}>Профиль</Button>
+          <Button onClick={handleLogOut}>Выйти</Button>
         </Wrapper>
       </Container>
+      <ProfileModal isShown={profileModal} showModal={showProfileModal} />
     </header>
   );
 }

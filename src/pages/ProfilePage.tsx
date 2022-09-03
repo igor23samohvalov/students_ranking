@@ -15,7 +15,7 @@ import {
   EntryAddIcon,
 } from "../components/styles/StyledIcons.styled";
 import Entry from "../components/Entry";
-import Loader from "../components/styles/Loader";
+import { ListLoader } from "../components/styles/Loader";
 import EditEntryModal from "../components/EditEntryModal";
 import RemoveModal from "../components/RemoveModal";
 
@@ -81,7 +81,7 @@ function ProfilePage() {
           <h3>История изменений:</h3>
           <EntriesContainer>
             {loading ? (
-              <Loader />
+              <ListLoader />
             ) : (
               entries.map((e) => (
                 <Entry
@@ -92,7 +92,7 @@ function ProfilePage() {
                 />
               ))
             )}
-            {user === "teacher" && (
+            {user.role === "teacher" && (
               <Button onClick={() => showAddEntry(true)}>
                 <EntryAddIcon />
               </Button>

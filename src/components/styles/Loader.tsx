@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-const LoaderContainer = styled.div`
+const StyledListLoader = styled.div`
   position: absolute;
   left: 50%;
   top: 45%;
@@ -62,18 +62,49 @@ const LoaderContainer = styled.div`
     }
   }
 `;
+const StyledButtonLoader = styled.div`
+  .lds-dual-ring {
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+  }
+  .lds-dual-ring:after {
+    content: " ";
+    display: block;
+    width: 12px;
+    height: 12px;
 
-function Loader() {
+    border-radius: 50%;
+    border: 2px solid #451b0b;
+    border-color: #451b0b transparent #451b0b transparent;
+    animation: lds-dual-ring 1.2s linear infinite;
+  }
+  @keyframes lds-dual-ring {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+`;
+export function ListLoader() {
   return (
-    <LoaderContainer>
+    <StyledListLoader>
       <div className="lds-ellipsis">
         <div />
         <div />
         <div />
         <div />
       </div>
-    </LoaderContainer>
+    </StyledListLoader>
   );
 }
 
-export default Loader;
+export function ButtonLoader() {
+  return (
+    <StyledButtonLoader>
+      <div className="lds-dual-ring" />
+    </StyledButtonLoader>
+  );
+}

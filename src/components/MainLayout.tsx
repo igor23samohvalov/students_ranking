@@ -12,7 +12,7 @@ function MainLayout() {
   const { user } = useAuth();
 
   useEffect(() => {
-    if (!user) navigate("/");
+    if (!user.role) navigate("/");
 
     dispatch(fetchStudents());
     dispatch(fetchEntries());

@@ -1,4 +1,5 @@
 import { useState } from "react";
+// import { ToastContainer } from "react-toastify";
 import Container from "../components/styles/Container.styled";
 import {
   StudentsContainer,
@@ -14,7 +15,7 @@ import EditModal from "../components/EditModal";
 import customHandler from "../lib/utility";
 import { useAppSelector } from "../hooks/reduxHooks";
 import RemoveModal from "../components/RemoveModal";
-import Loader from "../components/styles/Loader";
+import { ListLoader } from "../components/styles/Loader";
 import { AddStudentIcon } from "../components/styles/StyledIcons.styled";
 import ButtonIcon from "../components/styles/ButtonIcon.styled";
 
@@ -40,7 +41,7 @@ function MainPage() {
           <div />
           <div>
             {loading ? (
-              <Loader />
+              <ListLoader />
             ) : (
               customHandler(list, classFilter).map((student: IStudentId) => (
                 <StudentPreview
@@ -53,7 +54,7 @@ function MainPage() {
             )}
           </div>
           <div>
-            {user === "teacher" ? (
+            {user.role === "teacher" ? (
               <ButtonIcon onClick={() => setAddModal(true)}>
                 <AddStudentIcon />
               </ButtonIcon>
@@ -73,6 +74,17 @@ function MainPage() {
           id={isShownRemoveModal.id}
         />
       </Wrapper>
+      {/* <ToastContainer
+        position="top-center"
+        autoClose={3000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+      /> */}
     </Container>
   );
 }

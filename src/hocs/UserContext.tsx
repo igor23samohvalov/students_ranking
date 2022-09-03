@@ -3,19 +3,21 @@ import { signOut, onAuthStateChanged } from "firebase/auth";
 import { useAuthState } from "react-firebase-hooks/auth";
 import UserContext from "../hooks/hooks";
 import { auth } from "../lib/firebase";
+import { IUser } from "../Types/IUser";
 
 const emails = ["standingtrial@yandex.ru", "sandypandaadv@outlook.com"];
+const defaultUser = { role: "", email: "" };
 
 export default function UserProvider({ children }: { children: JSX.Element }) {
-  const [user, setUser] = useState<null | string>(null);
+  const [user, setUser] = useState<IUser>(defaultUser);
   const [, loading] = useAuthState(auth);
   const [handyLoading, setHandyLoading] = useState<boolean>(true);
 
-  const logIn = (login: any) => {
+  const logIn = (login: IUser) => {
     setUser(login);
   };
   const logOut = async () => {
-    setUser(null);
+    setUser(defaultUser);
     await signOut(auth);
   };
 
@@ -30,8 +32,15 @@ export default function UserProvider({ children }: { children: JSX.Element }) {
             // if (idTokenResult.claims?.role) logIn(idTokenResult.claims.role);
             // else logIn("student");
             if (emails.some((e) => e === idTokenResult.claims.email))
-              logIn("teacher");
-            else logIn("student");
+              logIn({
+                role: "teacher",
+                email: `${idTokenResult.claims.email}`,
+              });
+            else
+              logIn({
+                role: "student",
+                email: `${idTokenResult.claims.email}`,
+              });
           })
           .catch(console.log);
         // if (user.uid === "jhxsZsaQb8TtBiW1eVf8k0D8MSl2") logIn("student");

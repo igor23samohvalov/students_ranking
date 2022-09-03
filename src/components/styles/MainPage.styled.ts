@@ -20,7 +20,7 @@ export const StudentsContainer = styled.section`
   height: 80vh;
   
   > div {
-    border: 4px solid #bc8c61;
+    border: 0.5rem solid #bc8c61;
   }
   > div:first-of-type, > div:last-of-type {
     background-color: #bc8c61;

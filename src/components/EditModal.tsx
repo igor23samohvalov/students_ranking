@@ -13,6 +13,7 @@ import {
 import Button from "./styles/Button.styled";
 import CloseIcon from "./styles/CloseIcon";
 import { defaultOptions, StyledSelect } from "./styles/StyledSelect";
+import { ButtonLoader } from "./styles/Loader";
 
 const editStudentSchema = Yup.object().shape({
   name: Yup.string().required("Обязательное поле"),
@@ -68,7 +69,7 @@ function EditModal({
             resetForm();
           }}
         >
-          {({ setFieldValue, errors, touched }) => (
+          {({ setFieldValue, errors, touched, isSubmitting }) => (
             <StyledForm inputwidth="0.5fr">
               <label>
                 Имя:
@@ -146,7 +147,9 @@ function EditModal({
                   <ErrorMarkup>{errors.rating}</ErrorMarkup>
                 ) : null}
               </label>
-              <Button type="submit">Сохранить</Button>
+              <Button type="submit" disabled={isSubmitting}>
+                {isSubmitting ? <ButtonLoader /> : "Изменить"}
+              </Button>
               <CloseIcon
                 onClick={() => setEditModal({ student: {}, shown: false })}
               />

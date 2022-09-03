@@ -5,7 +5,7 @@ import styled from "styled-components";
 import * as Yup from "yup";
 import { ErrorMarkup, StyledForm } from "../components/styles/AddModal.styled";
 import Button from "../components/styles/Button.styled";
-import Loader from "../components/styles/Loader";
+import { ButtonLoader } from "../components/styles/Loader";
 import { auth } from "../lib/firebase";
 
 const signUpSchema = Yup.object().shape({
@@ -45,7 +45,7 @@ function SignUpPage() {
       validationSchema={signUpSchema}
       onSubmit={async (
         values: Values,
-        { setSubmitting }: FormikHelpers<Values>,
+        { setSubmitting, setFieldError }: FormikHelpers<Values>,
       ) => {
         setSubmitting(true);
         try {
@@ -55,8 +55,18 @@ function SignUpPage() {
             values.password,
           );
           navigate("/");
-        } catch (error) {
-          alert(error);
+        } catch (error: any) {
+          console.log(error.code);
+          switch (error.code) {
+            case "auth/email-already-in-use":
+              setFieldError("email", "Email уже используется");
+              break;
+            case "auth/network-request-failed":
+              break;
+            default:
+              console.log("No connection, probably.");
+              break;
+          }
         }
         setSubmitting(false);
       }}
@@ -114,8 +124,8 @@ function SignUpPage() {
               <ErrorMarkup>{errors.confirmPassword}</ErrorMarkup>
             ) : null}
           </label>
-          <Button type="submit">
-            {isSubmitting ? <Loader /> : "Зарегистрироваться"}
+          <Button type="submit" disabled={isSubmitting}>
+            {isSubmitting ? <ButtonLoader /> : "Зарегистрироваться"}
           </Button>
           <StyledLink to="/">Уже зарегистированы? Войти</StyledLink>
         </StyledForm>

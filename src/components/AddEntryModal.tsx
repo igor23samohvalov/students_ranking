@@ -12,6 +12,7 @@ import {
 } from "./styles/AddModal.styled";
 import Button from "./styles/Button.styled";
 import CloseIcon from "./styles/CloseIcon";
+import { ButtonLoader } from "./styles/Loader";
 
 const addEntrySchema = Yup.object().shape({
   value: Yup.number().required("Обязательное поле"),
@@ -64,7 +65,7 @@ function AddEntryModal({
             resetForm();
           }}
         >
-          {({ errors, touched }) => (
+          {({ errors, touched, isSubmitting }) => (
             <StyledForm inputwidth="0.2fr">
               <label>
                 Баллы:
@@ -100,7 +101,9 @@ function AddEntryModal({
                   <ErrorMarkup>{errors.comment}</ErrorMarkup>
                 ) : null}
               </label>
-              <Button type="submit">Добавить</Button>
+              <Button type="submit" disabled={isSubmitting}>
+                {isSubmitting ? <ButtonLoader /> : "Добавить"}
+              </Button>
               <CloseIcon onClick={handleClick} />
             </StyledForm>
           )}

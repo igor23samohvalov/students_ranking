@@ -5,7 +5,7 @@ import styled from "styled-components";
 import * as Yup from "yup";
 import { ErrorMarkup, StyledForm } from "../components/styles/AddModal.styled";
 import Button from "../components/styles/Button.styled";
-import Loader from "../components/styles/Loader";
+import { ButtonLoader } from "../components/styles/Loader";
 import useAuth from "../hooks/useAuth";
 import { auth } from "../lib/firebase";
 import ButtonBlock from "../components/styles/EntryPage.styled";
@@ -43,7 +43,7 @@ function EntryPage() {
       validationSchema={logInSchema}
       onSubmit={async (
         values: Values,
-        { setSubmitting }: FormikHelpers<Values>,
+        { setSubmitting, setFieldError }: FormikHelpers<Values>,
       ) => {
         setSubmitting(true);
         try {
@@ -52,9 +52,20 @@ function EntryPage() {
             values.username,
             values.password,
           );
-          logIn(values.username);
-        } catch (error) {
-          alert(error);
+        } catch (error: any) {
+          switch (error.code) {
+            case "auth/user-not-found":
+              setFieldError("username", "Пользователь не найден");
+              break;
+            case "auth/wrong-password":
+              setFieldError("password", "Неправильный пароль");
+              break;
+            case "auth/network-request-failed":
+              break;
+            default:
+              console.log("No connection, probably.");
+              break;
+          }
         }
         setSubmitting(false);
       }}
@@ -106,11 +117,14 @@ function EntryPage() {
           </div> */}
           <div>
             <ButtonBlock>
-              <Button type="button" onClick={() => logIn("guest")}>
+              <Button
+                type="button"
+                onClick={() => logIn({ role: "guest", email: "-" })}
+              >
                 Зайти как гость
               </Button>
-              <Button type="submit">
-                {isSubmitting ? <Loader /> : "Войти"}
+              <Button type="submit" disabled={isSubmitting}>
+                {isSubmitting ? <ButtonLoader /> : "Войти"}
               </Button>
             </ButtonBlock>
           </div>

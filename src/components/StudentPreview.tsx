@@ -52,7 +52,7 @@ function StudentPreview({
         <Button onClick={() => navigate(id)}>
           <ProfileIcon />
         </Button>
-        {user === "teacher" ? (
+        {user.role === "teacher" ? (
           <>
             <Button onClick={handleEdit}>
               <EditIcon />

@@ -1,5 +1,6 @@
 import { Formik, FormikHelpers, Field } from "formik";
 import * as Yup from "yup";
+import { toast } from "react-toastify";
 import { useAppDispatch } from "../hooks/reduxHooks";
 import { addStudent } from "../store/studentsSlice";
 import {
@@ -10,6 +11,7 @@ import {
 } from "./styles/AddModal.styled";
 import Button from "./styles/Button.styled";
 import CloseIcon from "./styles/CloseIcon";
+import { ButtonLoader } from "./styles/Loader";
 import { defaultOptions, StyledSelect } from "./styles/StyledSelect";
 
 const addStudentSchema = Yup.object().shape({
@@ -36,6 +38,7 @@ function AddModal({ isShownAddModal, setAddModal }: AddModalProps) {
   const handleClick = () => {
     setAddModal(false);
   };
+  const notify = (phrase: string) => toast(phrase, { autoClose: 2000 });
 
   return (
     <ModalContainer display={Number(isShownAddModal)}>
@@ -55,11 +58,12 @@ function AddModal({ isShownAddModal, setAddModal }: AddModalProps) {
           ) => {
             if (!values.form) values.form = "10А";
             dispatch(addStudent({ ...values, history: [], ranking: 0 }));
+            notify("easy");
             setAddModal(false);
             resetForm();
           }}
         >
-          {({ setFieldValue, errors, touched }) => (
+          {({ setFieldValue, errors, touched, isSubmitting }) => (
             <StyledForm inputwidth="0.5fr">
               <label>
                 Имя:
@@ -138,7 +142,9 @@ function AddModal({ isShownAddModal, setAddModal }: AddModalProps) {
                   <ErrorMarkup>{errors.rating}</ErrorMarkup>
                 ) : null}
               </label>
-              <Button type="submit">Добавить</Button>
+              <Button type="submit" disabled={isSubmitting}>
+                {isSubmitting ? <ButtonLoader /> : "Добавить"}
+              </Button>
               <CloseIcon onClick={handleClick} />
             </StyledForm>
           )}

@@ -11,11 +11,17 @@ export default styled.button`
   background-color: #fcbd80;
   transition: all 0.2s 0s ease;
   text-transform: uppercase;
-  font-size: 11px;
+  font-size: 14px;
   cursor: pointer;
+  height: 50px;
 
   &:hover {
     color: #fcbd80;
     background-color: #451b0b;
+
+    .lds-dual-ring:after {
+      border: 2px solid #fff;
+      border-color: #fff transparent #fff transparent;
+    }
   }
 `;
