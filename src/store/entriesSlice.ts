@@ -14,6 +14,7 @@ import {
   setDoc,
 } from "firebase/firestore";
 import { firestore } from "../lib/firebase";
+import { notify } from "../lib/utility";
 import { IEntry, IEntryId } from "../Types/IEntry";
 
 export const fetchEntries = createAsyncThunk<
@@ -116,6 +117,7 @@ const entriesSlice = createSlice({
           value: action.payload.value,
         });
         state.loading = false;
+        notify("Запись успешно добавлена", "success");
       })
       .addCase(editEntry.pending, (state) => {
         state.loading = true;
@@ -128,6 +130,7 @@ const entriesSlice = createSlice({
           return e;
         });
         state.loading = false;
+        notify("Данные записи изменены", "success");
       })
       .addCase(removeEntry.pending, (state) => {
         state.loading = true;
@@ -136,10 +139,12 @@ const entriesSlice = createSlice({
       .addCase(removeEntry.fulfilled, (state, action) => {
         state.list = state.list.filter((e) => e.id !== action.payload);
         state.loading = false;
+        notify("Запись удалена", "success");
       })
       .addMatcher(isError, (state, action: PayloadAction<string>) => {
         state.error = action.payload;
         state.loading = false;
+        notify("Операция не удалась", "error");
       });
   },
 });

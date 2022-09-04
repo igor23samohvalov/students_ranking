@@ -31,12 +31,12 @@ interface IValues {
 }
 
 function EditModal({
-  setEditModal,
-  isShownEditModal,
+  showModal,
+  isShown,
   student,
 }: {
-  setEditModal: React.Dispatch<React.SetStateAction<any>>;
-  isShownEditModal: boolean;
+  showModal: React.Dispatch<React.SetStateAction<any>>;
+  isShown: boolean;
   student: IStudentId;
 }) {
   const dispatch = useAppDispatch();
@@ -48,7 +48,7 @@ function EditModal({
   }, [form]);
 
   return (
-    <ModalContainer display={Number(isShownEditModal)}>
+    <ModalContainer display={Number(isShown)}>
       <ModalBody>
         <Formik
           initialValues={{
@@ -65,7 +65,7 @@ function EditModal({
             { resetForm }: FormikHelpers<IValues>,
           ) => {
             dispatch(editStudent({ ...values, id }));
-            setEditModal({ student: {}, shown: false });
+            showModal({ student: {}, shown: false });
             resetForm();
           }}
         >
@@ -151,7 +151,7 @@ function EditModal({
                 {isSubmitting ? <ButtonLoader /> : "Изменить"}
               </Button>
               <CloseIcon
-                onClick={() => setEditModal({ student: {}, shown: false })}
+                onClick={() => showModal({ student: {}, shown: false })}
               />
             </StyledForm>
           )}

@@ -30,9 +30,6 @@ type AddModalProps = {
 
 function EditEntryModal({ isShown, showModal, entry }: AddModalProps) {
   const dispatch = useAppDispatch();
-  const handleClick = () => {
-    showModal(false);
-  };
 
   return (
     <ModalContainer display={Number(isShown)}>
@@ -77,10 +74,10 @@ function EditEntryModal({ isShown, showModal, entry }: AddModalProps) {
                   component="textarea"
                   type="text"
                   name="comment"
-                  placeholder="Ко"
+                  placeholder="Комментарий"
                   rows="4"
                   style={{
-                    border: `2px solid${
+                    border: `2px solid ${
                       errors.comment && touched.comment ? "#a10035" : "#451b0b"
                     }`,
                   }}
@@ -92,7 +89,9 @@ function EditEntryModal({ isShown, showModal, entry }: AddModalProps) {
               <Button type="submit" disabled={isSubmitting}>
                 {isSubmitting ? <ButtonLoader /> : "Изменить"}
               </Button>
-              <CloseIcon onClick={handleClick} />
+              <CloseIcon
+                onClick={() => showModal({ entry: {}, shown: false })}
+              />
             </StyledForm>
           )}
         </Formik>

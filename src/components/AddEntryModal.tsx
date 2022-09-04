@@ -89,7 +89,7 @@ function AddEntryModal({
                   component="textarea"
                   type="text"
                   name="comment"
-                  placeholder="Ко"
+                  placeholder="Комментарий"
                   rows="4"
                   style={{
                     border: `2px solid${

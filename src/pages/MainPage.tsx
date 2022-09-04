@@ -1,28 +1,21 @@
 import { useState } from "react";
-// import { ToastContainer } from "react-toastify";
 import Container from "../components/styles/Container.styled";
 import {
   StudentsContainer,
   Wrapper,
 } from "../components/styles/MainPage.styled";
-import StudentPreview from "../components/StudentPreview";
-import useAuth from "../hooks/useAuth";
 import Menu from "../components/Menu";
+import useAuth from "../hooks/useAuth";
 import AddModal from "../components/AddModal";
-import { IStudentId } from "../Types/IStudent";
 import EditModal from "../components/EditModal";
-// import PlaceholderStudent from "../components/PlaceholderStudent";
-import customHandler from "../lib/utility";
-import { useAppSelector } from "../hooks/reduxHooks";
 import RemoveModal from "../components/RemoveModal";
-import { ListLoader } from "../components/styles/Loader";
-import { AddStudentIcon } from "../components/styles/StyledIcons.styled";
+import StudentsList from "../components/StudentsList";
 import ButtonIcon from "../components/styles/ButtonIcon.styled";
+import { AddStudentIcon } from "../components/styles/StyledIcons.styled";
 
 function MainPage() {
   const { user } = useAuth();
-  const { list, loading } = useAppSelector((state) => state.students);
-  const [classFilter, setClassFilter] = useState<string | boolean>(false);
+  const [classFilter, setClassFilter] = useState<string>("");
   const [isShownAddModal, setAddModal] = useState<boolean>(false);
   const [isShownRemoveModal, setRemoveModal] = useState({
     shown: false,
@@ -40,18 +33,11 @@ function MainPage() {
         <StudentsContainer>
           <div />
           <div>
-            {loading ? (
-              <ListLoader />
-            ) : (
-              customHandler(list, classFilter).map((student: IStudentId) => (
-                <StudentPreview
-                  key={student.id}
-                  student={student}
-                  setEditModal={setEditModal}
-                  setRemoveModal={setRemoveModal}
-                />
-              ))
-            )}
+            <StudentsList
+              filter={classFilter}
+              setEditModal={setEditModal}
+              setRemoveModal={setRemoveModal}
+            />
           </div>
           <div>
             {user.role === "teacher" ? (
@@ -63,8 +49,8 @@ function MainPage() {
         </StudentsContainer>
         <AddModal isShownAddModal={isShownAddModal} setAddModal={setAddModal} />
         <EditModal
-          setEditModal={setEditModal}
-          isShownEditModal={isShownEditModal.shown}
+          showModal={setEditModal}
+          isShown={isShownEditModal.shown}
           student={isShownEditModal.student}
         />
         <RemoveModal
@@ -74,17 +60,6 @@ function MainPage() {
           id={isShownRemoveModal.id}
         />
       </Wrapper>
-      {/* <ToastContainer
-        position="top-center"
-        autoClose={3000}
-        hideProgressBar={false}
-        newestOnTop={false}
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover
-      /> */}
     </Container>
   );
 }

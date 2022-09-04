@@ -9,6 +9,7 @@ import { ButtonLoader } from "../components/styles/Loader";
 import useAuth from "../hooks/useAuth";
 import { auth } from "../lib/firebase";
 import ButtonBlock from "../components/styles/EntryPage.styled";
+import { notify } from "../lib/utility";
 
 const logInSchema = Yup.object().shape({
   username: Yup.string()
@@ -61,9 +62,10 @@ function EntryPage() {
               setFieldError("password", "Неправильный пароль");
               break;
             case "auth/network-request-failed":
+              notify("Нет подключения к сети", "warn");
               break;
             default:
-              console.log("No connection, probably.");
+              notify("", "");
               break;
           }
         }

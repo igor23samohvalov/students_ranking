@@ -9,6 +9,7 @@ export const MenuContainer = styled.section`
   height: fit-content;
   padding: 2rem;
   border: 2px solid #bc8c61;
+  border-radius: 0.5rem;
   background-color: #e9d2b8;
   gap: 2rem;
   text-align: center;

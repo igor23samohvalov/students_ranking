@@ -25,7 +25,7 @@ export default function UserProvider({ children }: { children: JSX.Element }) {
     onAuthStateChanged(auth, (user) => {
       if (user) {
         // https://firebase.google.com/docs/reference/js/firebase.User
-        console.log("user is in: ", user);
+        // console.log("user is in: ", user);
         user
           .getIdTokenResult()
           .then((idTokenResult) => {
@@ -47,7 +47,6 @@ export default function UserProvider({ children }: { children: JSX.Element }) {
         // else logIn("teacher");
       } else {
         logOut();
-        console.log("user is out");
       }
     });
   }, [auth]);

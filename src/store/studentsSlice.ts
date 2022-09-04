@@ -14,6 +14,7 @@ import {
   setDoc,
 } from "firebase/firestore";
 import { firestore } from "../lib/firebase";
+import { notify } from "../lib/utility";
 import { IStudentId, IStudent } from "../Types/IStudent";
 // import { addEntry } from "./entriesSlice";
 
@@ -33,7 +34,7 @@ export const fetchStudents = createAsyncThunk<
 
     return students;
   } catch (error: any) {
-    return rejectWithValue(error.message);
+    return rejectWithValue(error);
   }
 });
 export const addStudent = createAsyncThunk<
@@ -46,7 +47,7 @@ export const addStudent = createAsyncThunk<
 
     return { ...data, id: doc.id };
   } catch (error: any) {
-    return rejectWithValue(error.message);
+    return rejectWithValue(error);
   }
 });
 export const editStudent = createAsyncThunk<
@@ -60,7 +61,7 @@ export const editStudent = createAsyncThunk<
 
     return data;
   } catch (error: any) {
-    return rejectWithValue(error.message);
+    return rejectWithValue(error);
   }
 });
 export const removeStudent = createAsyncThunk<
@@ -73,7 +74,7 @@ export const removeStudent = createAsyncThunk<
 
     return id;
   } catch (error: any) {
-    return rejectWithValue(error.message);
+    return rejectWithValue(error);
   }
 });
 
@@ -121,6 +122,7 @@ const studentsSlice = createSlice({
           email: action.payload.email,
         });
         state.loading = false;
+        notify("Студент успешно добавлен", "success");
       })
       .addCase(editStudent.pending, (state) => {
         state.loading = true;
@@ -133,6 +135,7 @@ const studentsSlice = createSlice({
           return s;
         });
         state.loading = false;
+        notify("Данные студента изменены", "success");
       })
       .addCase(removeStudent.pending, (state) => {
         state.loading = true;
@@ -141,6 +144,7 @@ const studentsSlice = createSlice({
       .addCase(removeStudent.fulfilled, (state, action) => {
         state.list = state.list.filter((s) => s.id !== action.payload);
         state.loading = false;
+        notify("Студент удалён", "success");
       })
       // .addCase(addEntry.fulfilled, (state, action) => {
       //   const student = state.list.find((s) => {
@@ -155,6 +159,7 @@ const studentsSlice = createSlice({
       .addMatcher(isError, (state, action: PayloadAction<string>) => {
         state.error = action.payload;
         state.loading = false;
+        notify("Операция не удалась", "error");
       });
   },
 });

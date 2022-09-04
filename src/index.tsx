@@ -1,6 +1,8 @@
+import "react-toastify/dist/ReactToastify.css";
 import { Provider } from "react-redux";
 import ReactDOM from "react-dom/client";
 import { BrowserRouter } from "react-router-dom";
+import { ToastContainer } from "react-toastify";
 import GlobalStyles from "./components/styles/Global.styled";
 import App from "./App";
 import UserProvider from "./hocs/UserContext";
@@ -16,6 +18,15 @@ root.render(
       <UserProvider>
         <App />
       </UserProvider>
+      <ToastContainer
+        autoClose={2000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnHover
+        theme="dark"
+      />
     </BrowserRouter>
   </Provider>,
 );

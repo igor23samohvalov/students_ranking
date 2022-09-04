@@ -7,6 +7,7 @@ import { ErrorMarkup, StyledForm } from "../components/styles/AddModal.styled";
 import Button from "../components/styles/Button.styled";
 import { ButtonLoader } from "../components/styles/Loader";
 import { auth } from "../lib/firebase";
+import { notify } from "../lib/utility";
 
 const signUpSchema = Yup.object().shape({
   email: Yup.string().email("Неправильный email").required("Обязательное поле"),
@@ -62,9 +63,10 @@ function SignUpPage() {
               setFieldError("email", "Email уже используется");
               break;
             case "auth/network-request-failed":
+              notify("Нет подключения к сети", "warn");
               break;
             default:
-              console.log("No connection, probably.");
+              notify("", "");
               break;
           }
         }

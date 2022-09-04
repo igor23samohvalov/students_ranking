@@ -14,10 +14,9 @@ import {
   BackIcon,
   EntryAddIcon,
 } from "../components/styles/StyledIcons.styled";
-import Entry from "../components/Entry";
-import { ListLoader } from "../components/styles/Loader";
 import EditEntryModal from "../components/EditEntryModal";
 import RemoveModal from "../components/RemoveModal";
+import EntriesList from "../components/EntriesList";
 
 const studentPlaceholder = {
   surname: "unknown",
@@ -32,11 +31,6 @@ function ProfilePage() {
   const { id } = useParams();
   const { user } = useAuth();
   const navigate = useNavigate();
-
-  const entries = useAppSelector((state) =>
-    state.entries.list.filter((e) => e.studentId === id),
-  );
-  const loading = useAppSelector((state) => state.entries.loading);
 
   const [isEditEntryShown, showEditEntry] = useState<any>({
     shown: false,
@@ -80,18 +74,11 @@ function ProfilePage() {
         <div>
           <h3>История изменений:</h3>
           <EntriesContainer>
-            {loading ? (
-              <ListLoader />
-            ) : (
-              entries.map((e) => (
-                <Entry
-                  key={id}
-                  data={e}
-                  showEditEntry={showEditEntry}
-                  showRemoveEntry={showRemoveEntry}
-                />
-              ))
-            )}
+            <EntriesList
+              showEditEntry={showEditEntry}
+              showRemoveEntry={showRemoveEntry}
+              id={id}
+            />
             {user.role === "teacher" && (
               <Button onClick={() => showAddEntry(true)}>
                 <EntryAddIcon />

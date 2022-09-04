@@ -19,6 +19,7 @@ export const ProfileContainer = styled.section`
     padding: 2rem;
     flex-grow: 1;
     font-size: 14px;
+    width: 50%;
 
     > div {
       display: flex;

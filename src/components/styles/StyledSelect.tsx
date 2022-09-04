@@ -2,7 +2,7 @@ import Select from "react-select";
 import styled from "styled-components";
 
 export const allOptions = [
-  { value: false, label: "ВСЕ" },
+  { value: "", label: "ВСЕ" },
   { value: "10А", label: "10А" },
   { value: "10Б", label: "10Б" },
   { value: "11А", label: "11А" },

@@ -32,9 +32,9 @@ function StudentPreview({
 
   return (
     <Card
-      initial={{ opacity: 0, scale: 0.8 }}
-      animate={{ opacity: 1, scale: 1 }}
-      transition={{ duration: 0.2 }}
+      initial={{ opacity: 0, y: 50 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.4 }}
     >
       <CardBlock>
         <span>{ranking === undefined || ranking > 5 ? "?" : ranking}</span>

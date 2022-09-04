@@ -24,12 +24,12 @@ export const StudentsContainer = styled.section`
   }
   > div:first-of-type, > div:last-of-type {
     background-color: #bc8c61;
-    border-radius: 3rem 3rem 0 0;
+    border-radius: 0.5rem 0.5rem 0 0;
     height: 6rem;
     // box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
   }
   > div:last-of-type {
-    border-radius: 0 0 3rem 3rem;
+    border-radius: 0 0 0.5rem 0.5rem;
     display: flex;
     justify-content: center;
   }

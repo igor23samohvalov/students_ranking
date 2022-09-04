@@ -4,7 +4,7 @@ import { StyledSelect, allOptions } from "./styles/StyledSelect";
 function Menu({
   setClassFilter,
 }: {
-  setClassFilter: React.Dispatch<React.SetStateAction<string | boolean>>;
+  setClassFilter: React.Dispatch<React.SetStateAction<string>>;
 }) {
   const handleChange = (e: any) => {
     setClassFilter(e.value);

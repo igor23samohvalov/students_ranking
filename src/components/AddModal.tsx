@@ -1,6 +1,5 @@
 import { Formik, FormikHelpers, Field } from "formik";
 import * as Yup from "yup";
-import { toast } from "react-toastify";
 import { useAppDispatch } from "../hooks/reduxHooks";
 import { addStudent } from "../store/studentsSlice";
 import {
@@ -38,7 +37,6 @@ function AddModal({ isShownAddModal, setAddModal }: AddModalProps) {
   const handleClick = () => {
     setAddModal(false);
   };
-  const notify = (phrase: string) => toast(phrase, { autoClose: 2000 });
 
   return (
     <ModalContainer display={Number(isShownAddModal)}>
@@ -58,7 +56,6 @@ function AddModal({ isShownAddModal, setAddModal }: AddModalProps) {
           ) => {
             if (!values.form) values.form = "10А";
             dispatch(addStudent({ ...values, history: [], ranking: 0 }));
-            notify("easy");
             setAddModal(false);
             resetForm();
           }}
