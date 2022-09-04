@@ -10,7 +10,7 @@ function Header() {
   const { logOut } = useAuth();
   const navigate = useNavigate();
 
-  const [profileModal, showProfileModal] = useState<boolean>(false);
+  const [isShownProfileModal, showProfileModal] = useState<boolean>(false);
 
   const handleLogOut = () => {
     logOut();
@@ -28,7 +28,7 @@ function Header() {
           <Button onClick={handleLogOut}>Выйти</Button>
         </Wrapper>
       </Container>
-      <ProfileModal isShown={profileModal} showModal={showProfileModal} />
+      {isShownProfileModal && <ProfileModal showModal={showProfileModal} />}
     </header>
   );
 }

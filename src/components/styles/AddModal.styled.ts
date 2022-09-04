@@ -1,15 +1,16 @@
 import { Form } from "formik";
+import { motion } from "framer-motion";
 import styled from "styled-components";
 
-interface IModal {
-  display: number;
-}
 interface IForm {
   inputwidth: string;
 }
 
-export const ModalContainer = styled.div<IModal>`
-  display: ${({ display }) => (display ? "block;" : "none;")};
+export const ModalContainer = styled(motion.div).attrs(() => ({
+  initial: { opacity: 0 },
+  animate: { opacity: 1 },
+  transition: { duration: 0.01 },
+}))`
   position: fixed;
   z-index: 1;
   left: 0;
@@ -32,6 +33,11 @@ export const ModalBody = styled.div`
   border: 2px solid #451b0b;
   border-radius: 10px;
   box-shadow: 0 3px 7px rgba(0, 0, 0, 0.3);
+
+  @media (max-width: 768px) {
+    padding: 1.5rem;
+    width: 90%;
+  }
 `;
 
 export const StyledForm = styled(Form)<IForm>`
@@ -40,6 +46,10 @@ export const StyledForm = styled(Form)<IForm>`
   display: flex;
   flex-direction: column;
   gap: 1rem;
+
+  @media (max-width: 768px) {
+    gap: 2rem;
+  }
 
   h2 {
     text-align: center;
@@ -51,8 +61,14 @@ export const StyledForm = styled(Form)<IForm>`
     grid-template-columns: ${(props) => props.inputwidth} 1fr;
     align-items: center;
     gap: 2rem;
-    align-items: center;
     justify-items: end;
+
+    @media (max-width: 768px) {
+      grid-template-columns: 1fr;
+      justify-items: start;
+      gap: 0.5rem;
+      font-size: 14px;
+    }
 
     input,
     textarea {
@@ -90,4 +106,8 @@ export const ErrorMarkup = styled.div`
   color: #fff;
   padding: 0.3rem;
   font-size: 8px;
+
+  @media (max-width: 768px) {
+    top: 33%;
+  }
 `;

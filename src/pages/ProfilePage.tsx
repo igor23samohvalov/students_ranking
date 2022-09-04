@@ -87,22 +87,22 @@ function ProfilePage() {
           </EntriesContainer>
         </div>
       </ProfileContainer>
-      <AddEntryModal
-        isAddEntryShown={isAddEntryShown}
-        showAddEntry={showAddEntry}
-        student={student}
-      />
-      <EditEntryModal
-        isShown={isEditEntryShown.shown}
-        showModal={showEditEntry}
-        entry={isEditEntryShown.entry}
-      />
-      <RemoveModal
-        entity="entry"
-        isShown={isRemoveEntryShown.shown}
-        showModal={showRemoveEntry}
-        id={isRemoveEntryShown.id}
-      />
+      {isAddEntryShown && (
+        <AddEntryModal showAddEntry={showAddEntry} student={student} />
+      )}
+      {isEditEntryShown.shown && (
+        <EditEntryModal
+          showModal={showEditEntry}
+          entry={isEditEntryShown.entry}
+        />
+      )}
+      {isRemoveEntryShown.shown && (
+        <RemoveModal
+          entity="entry"
+          showModal={showRemoveEntry}
+          id={isRemoveEntryShown.id}
+        />
+      )}
     </Container>
   );
 }

@@ -11,6 +11,11 @@ export const ProfileContainer = styled.section`
   height: 550px;
   margin: 0 auto;
 
+  @media (max-width: 768px) {
+    position: relative;
+    height: 83vh;
+  }
+
   > div {
     display flex;
     flex-direction: column;
@@ -20,6 +25,15 @@ export const ProfileContainer = styled.section`
     flex-grow: 1;
     font-size: 14px;
     width: 50%;
+
+    @media (max-width: 768px) {
+      width: 100%;
+
+      > div:first-of-type {
+        align-items: flex-end;
+        margin-bottom: 2rem;
+      }
+    }
 
     > div {
       display: flex;
@@ -33,13 +47,19 @@ export const ProfileContainer = styled.section`
       }
     }
 
-    button {
+    > button {
       margin-top: auto;
       align-self: flex-start;
       padding: 0.5rem;
       box-shadow: none;
       height: fit-content;
       width: fit-content;
+
+      @media (max-width: 768px) {
+        position: absolute;
+        top: 2rem;
+        right: 2rem;
+      }
     }
 
     h3 {
@@ -52,7 +72,10 @@ export const ProfileContainer = styled.section`
       border-radius: 10px 0 0 10px;
 
       @media (max-width: 768px) {
-        border-radius: 10px 10px 0 0;
+        border-radius: 0 0 10px 10px;
+        border-left: none;
+        border-top: 2px solid #451b0b;
+        height: 100%;
       }
 
       button {
@@ -73,6 +96,23 @@ export const EntriesContainer = styled.div`
   overflow: auto;
   padding-right: 0.2rem;
   height: 100%;
+
+  h4 {
+    text-align: center;
+  }
+
+  > button {
+    margin-top: auto;
+    align-self: flex-start;
+    padding: 0.5rem;
+    box-shadow: none;
+    height: fit-content;
+    width: fit-content;
+  }
+
+  @media (max-width: 768px) {
+    width: 100%;
+  }
 
   ::-webkit-scrollbar {
     width: 10px;

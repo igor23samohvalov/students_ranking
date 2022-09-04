@@ -18,6 +18,11 @@ export const StudentsContainer = styled.section`
   flex-direction: column;
   width: 70%;
   height: 80vh;
+
+  @media (max-width: 768px) {
+    height: 70vh;
+    width: 100%;
+  }
   
   > div {
     border: 0.5rem solid #bc8c61;
@@ -27,11 +32,19 @@ export const StudentsContainer = styled.section`
     border-radius: 0.5rem 0.5rem 0 0;
     height: 6rem;
     // box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+
+    @media (max-width: 768px) {
+      height: 1rem;
+    }
   }
   > div:last-of-type {
     border-radius: 0 0 0.5rem 0.5rem;
     display: flex;
     justify-content: center;
+
+    @media (max-width: 768px) {
+      height: 3rem;
+    }
   }
   > div:nth-of-type(2) {
     overflow: auto;

@@ -27,8 +27,14 @@ interface Values {
 const StyledLink = styled(Link)`
   margin-top: 2rem;
   color: #a10035;
+
   &:hover {
     color: #2a0944;
+  }
+
+  @media (max-width: 768px) {
+    font-size: 12px;
+    text-align: center;
   }
 `;
 

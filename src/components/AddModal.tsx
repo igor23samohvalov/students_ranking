@@ -28,18 +28,17 @@ interface IValues {
   email: string;
 }
 type AddModalProps = {
-  isShownAddModal: boolean;
   setAddModal: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
-function AddModal({ isShownAddModal, setAddModal }: AddModalProps) {
+function AddModal({ setAddModal }: AddModalProps) {
   const dispatch = useAppDispatch();
   const handleClick = () => {
     setAddModal(false);
   };
 
   return (
-    <ModalContainer display={Number(isShownAddModal)}>
+    <ModalContainer>
       <ModalBody>
         <Formik
           initialValues={{

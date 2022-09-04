@@ -14,6 +14,10 @@ export const Card = styled(motion.div)`
     box-shadow: 0px 5px 10px 2px rgba(34, 60, 80, 0.2) inset;
     background-color: #dbc5ab;
   }
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+  }
 `;
 
 export const CardTitle = styled.h4`
@@ -32,6 +36,10 @@ export const CardBlock = styled.div`
 
   > * {
     margin: 0;
+
+    @media (max-width: 768px) {
+      text-align: center;
+    }
   }
   h4 {
     font-size: 15px;
@@ -53,6 +61,11 @@ export const CardBlock = styled.div`
     margin-left: auto;
     padding: 1rem 2rem;
 
+    @media (max-width: 768px) {
+      justify-content: center;
+      margin: 0;
+    }
+
     > button {
       padding: 0.5rem;
       height: fit-content;
@@ -65,4 +78,8 @@ export const CardImg = styled.img`
   width: 4.5rem;
   height: 4.5rem;
   border: 3px solid #451b0b;
+
+  @media (max-width: 768px) {
+    margin: 0 auto;
+  }
 `;

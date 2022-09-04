@@ -47,18 +47,20 @@ function MainPage() {
             ) : null}
           </div>
         </StudentsContainer>
-        <AddModal isShownAddModal={isShownAddModal} setAddModal={setAddModal} />
-        <EditModal
-          showModal={setEditModal}
-          isShown={isShownEditModal.shown}
-          student={isShownEditModal.student}
-        />
-        <RemoveModal
-          entity="student"
-          showModal={setRemoveModal}
-          isShown={isShownRemoveModal.shown}
-          id={isShownRemoveModal.id}
-        />
+        {isShownAddModal && <AddModal setAddModal={setAddModal} />}
+        {isShownEditModal.shown && (
+          <EditModal
+            showModal={setEditModal}
+            student={isShownEditModal.student}
+          />
+        )}
+        {isShownRemoveModal.shown && (
+          <RemoveModal
+            entity="student"
+            showModal={setRemoveModal}
+            id={isShownRemoveModal.id}
+          />
+        )}
       </Wrapper>
     </Container>
   );

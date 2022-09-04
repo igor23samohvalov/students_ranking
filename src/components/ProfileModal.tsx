@@ -10,11 +10,10 @@ const userMapping = {
 };
 
 type ProfileModalProps = {
-  isShown: boolean;
   showModal: React.Dispatch<React.SetStateAction<any>>;
 };
 
-function ProfileModal({ isShown, showModal }: ProfileModalProps) {
+function ProfileModal({ showModal }: ProfileModalProps) {
   const { user } = useAuth();
 
   const handleClick = () => {
@@ -22,7 +21,7 @@ function ProfileModal({ isShown, showModal }: ProfileModalProps) {
   };
 
   return (
-    <ModalContainer display={Number(isShown)}>
+    <ModalContainer>
       <ModalBody>
         <ModalInfo>
           <h2>Профиль</h2>

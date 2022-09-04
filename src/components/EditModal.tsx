@@ -32,11 +32,9 @@ interface IValues {
 
 function EditModal({
   showModal,
-  isShown,
   student,
 }: {
   showModal: React.Dispatch<React.SetStateAction<any>>;
-  isShown: boolean;
   student: IStudentId;
 }) {
   const dispatch = useAppDispatch();
@@ -48,7 +46,7 @@ function EditModal({
   }, [form]);
 
   return (
-    <ModalContainer display={Number(isShown)}>
+    <ModalContainer>
       <ModalBody>
         <Formik
           initialValues={{

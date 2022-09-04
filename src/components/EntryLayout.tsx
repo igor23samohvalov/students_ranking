@@ -13,6 +13,7 @@ const EntryCard = styled.section`
   border: 2px solid #451b0b;
   border-radius: 10px;
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+  max-width: 90%;
 `;
 
 function EntryLayout() {

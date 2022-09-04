@@ -24,23 +24,18 @@ interface IValues {
   comment: string;
 }
 type AddModalProps = {
-  isAddEntryShown: boolean;
   showAddEntry: React.Dispatch<React.SetStateAction<boolean>>;
   student: IStudentId;
 };
 
-function AddEntryModal({
-  isAddEntryShown,
-  showAddEntry,
-  student,
-}: AddModalProps) {
+function AddEntryModal({ showAddEntry, student }: AddModalProps) {
   const dispatch = useAppDispatch();
   const handleClick = () => {
     showAddEntry(false);
   };
 
   return (
-    <ModalContainer display={Number(isAddEntryShown)}>
+    <ModalContainer>
       <ModalBody>
         <Formik
           initialValues={{

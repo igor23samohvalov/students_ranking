@@ -7,6 +7,7 @@ import { ErrorMarkup, StyledForm } from "../components/styles/AddModal.styled";
 import Button from "../components/styles/Button.styled";
 import { ButtonLoader } from "../components/styles/Loader";
 import { auth } from "../lib/firebase";
+import ButtonBlock from "../components/styles/EntryPage.styled";
 import { notify } from "../lib/utility";
 
 const signUpSchema = Yup.object().shape({
@@ -14,10 +15,9 @@ const signUpSchema = Yup.object().shape({
   password: Yup.string()
     .min(6, "Минимальная длина - 6 символов")
     .required("Обязательное поле"),
-  confirmPassword: Yup.string().oneOf(
-    [Yup.ref("password"), null],
-    "Пароли должны совпадать",
-  ),
+  confirmPassword: Yup.string()
+    .oneOf([Yup.ref("password"), null], "Пароли должны совпадать")
+    .required("Обязательное поле"),
 });
 
 interface Values {
@@ -27,9 +27,16 @@ interface Values {
 }
 
 const StyledLink = styled(Link)`
+  margin-top: 2rem;
   color: #a10035;
+
   &:hover {
     color: #2a0944;
+  }
+
+  @media (max-width: 768px) {
+    font-size: 12px;
+    text-align: center;
   }
 `;
 
@@ -126,9 +133,11 @@ function SignUpPage() {
               <ErrorMarkup>{errors.confirmPassword}</ErrorMarkup>
             ) : null}
           </label>
-          <Button type="submit" disabled={isSubmitting}>
-            {isSubmitting ? <ButtonLoader /> : "Зарегистрироваться"}
-          </Button>
+          <ButtonBlock>
+            <Button type="submit" disabled={isSubmitting}>
+              {isSubmitting ? <ButtonLoader /> : "Зарегистрироваться"}
+            </Button>
+          </ButtonBlock>
           <StyledLink to="/">Уже зарегистированы? Войти</StyledLink>
         </StyledForm>
       )}

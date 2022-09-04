@@ -7,12 +7,11 @@ import { removeEntry } from "../store/entriesSlice";
 
 type RemoveModalProps = {
   showModal: React.Dispatch<React.SetStateAction<any>>;
-  isShown: boolean;
   id: string;
   entity: string;
 };
 
-function RemoveModal({ showModal, isShown, id, entity }: RemoveModalProps) {
+function RemoveModal({ showModal, id, entity }: RemoveModalProps) {
   const dispatch = useAppDispatch();
 
   const handleClose = () => {
@@ -29,7 +28,7 @@ function RemoveModal({ showModal, isShown, id, entity }: RemoveModalProps) {
   };
 
   return (
-    <ModalContainer display={Number(isShown)}>
+    <ModalContainer>
       <ModalBody>
         <Title>Удалить {entity === "student" ? "студента" : "запись"}?</Title>
         <ButtonBlock>

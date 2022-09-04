@@ -9,4 +9,9 @@ export default styled(RiCloseLine).attrs({
   right: -2rem;
   color: #451b0b;
   cursor: pointer;
+
+  @media (max-width: 768px) {
+    top: -1rem;
+    right: -1rem;
+  }
 `;

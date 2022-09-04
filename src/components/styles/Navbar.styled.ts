@@ -6,4 +6,8 @@ export default styled.div`
   align-items: center;
   padding: 1.5rem 0;
   gap: 2rem;
+
+  @media (max-width: 768px) {
+    justify-content: space-between;
+  }
 `;
