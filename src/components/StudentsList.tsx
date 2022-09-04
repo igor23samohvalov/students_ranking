@@ -21,9 +21,8 @@ function StudentsList({
   const { list, loading } = useAppSelector((state) => state.students);
 
   useEffect(() => {
-    console.log("setfiltered useeffect worked");
     setFilteredList(customHandler(list, filter));
-  }, [list]);
+  }, [list, filter]);
 
   if (loading) return <ListLoader />;
   if (filteredList.length === 0) return <PlaceholderStudent />;
