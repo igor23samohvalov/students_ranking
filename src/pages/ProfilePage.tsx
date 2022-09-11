@@ -60,9 +60,9 @@ function ProfilePage() {
             <strong>Класс: </strong>
             {student.form}
           </div>
-          <div>
+          {/* <div>
             <strong>Ранк: </strong>work in progress
-          </div>
+          </div> */}
           <div>
             <strong>Рейтинг: </strong>
             {student.rating}

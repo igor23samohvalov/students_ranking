@@ -6,7 +6,7 @@ import * as Yup from "yup";
 import { ErrorMarkup, StyledForm } from "../components/styles/AddModal.styled";
 import Button from "../components/styles/Button.styled";
 import { ButtonLoader } from "../components/styles/Loader";
-import useAuth from "../hooks/useAuth";
+// import useAuth from "../hooks/useAuth";
 import { auth } from "../lib/firebase";
 import ButtonBlock from "../components/styles/EntryPage.styled";
 import { notify } from "../lib/utility";
@@ -39,7 +39,7 @@ const StyledLink = styled(Link)`
 `;
 
 function EntryPage() {
-  const { logIn } = useAuth();
+  // const { logIn } = useAuth();
 
   return (
     <Formik
@@ -125,12 +125,12 @@ function EntryPage() {
           </div> */}
           <div>
             <ButtonBlock>
-              <Button
+              {/* <Button
                 type="button"
                 onClick={() => logIn({ role: "guest", email: "-" })}
               >
                 Зайти как гость
-              </Button>
+              </Button> */}
               <Button type="submit" disabled={isSubmitting}>
                 {isSubmitting ? <ButtonLoader /> : "Войти"}
               </Button>
